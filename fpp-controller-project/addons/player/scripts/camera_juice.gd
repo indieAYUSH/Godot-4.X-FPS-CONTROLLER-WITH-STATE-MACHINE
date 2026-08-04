@@ -19,12 +19,31 @@ class_name CameraJuiceComponent extends Node3D
 @export var max_speed : float = 9.0
 
 @export_category("Headbob Vars")
+@export_group("yaw and pitch headbob")
 @export var bob_pitch : float = 0.05
 @export var bob_roll : float = 0.025
 @export var bob_up :float = 0.0005
 @export var bob_frequncy : float = 7.0
+@export_group("sinwave x y axis headbob")
+@export var bob_frequency : float
+@export var bob_amplitude : float
 
+
+
+@export_group("Collision checker")
+@export var left_collision_checker : ShapeCast3D
+@export var right_collision_checker : ShapeCast3D
+ 
+
+#--=====yaw and pitch only==-----#
 var _step_timer : float = 0.0
+
+#----===== x y axis disp only =====- --------#
+var current_bob_amplitude : float
+var current_bob_frquency : float
+var current_roll : float  #used slightly to give more feel to head bob
+
+var bob_offset_vector : Vector2
 
 @export_category("FOV Vars")
 var target_fov : float
@@ -44,7 +63,7 @@ func _process(delta):
 func camera_effects_manager(delta:float) -> void:
 	var angles  = Vector3.ZERO
 	var offsets = Vector3.ZERO
-	
+	var collider_value  = float(!left_collision_checker.is_colliding() and !right_collision_checker.is_colliding())
 	var velocity = Player.velocity.length()
 	
 	
@@ -58,25 +77,41 @@ func camera_effects_manager(delta:float) -> void:
 	#Headbob Things ===============================================================
 	
 	var speed = Vector2(Player.velocity.x , Player.velocity.z).length()
-	if speed > 0.1 and Player.is_on_floor()  :
-		_step_timer += delta*(speed/bob_frequncy)
-		_step_timer = fmod(_step_timer , 1.0)
-	else:
-		_step_timer = 0.0
-	var bob_sin = sin(_step_timer* 2.0 * PI) *0.5
 	
-	if Head_bob and _can_headbob():
-		var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
-		angles.x -= pitch_delta
-		
-		var roll_delta = bob_sin*deg_to_rad(bob_roll) * speed
-		angles.z -= roll_delta
-		
-		var up_delta = bob_sin * speed * bob_up
-		offsets.y += up_delta
-		
+	#--======= i prefer x yt axis headbob so i am gonna use that by default
+	#========= u can use onr according to ur neded
 	
+	#_+-----------========== roll yaw headbob===========----------------#
 	
+	#if speed > 0.1 and Player.is_on_floor()  :
+		#_step_timer += delta*(speed/bob_frequncy)
+		#_step_timer = fmod(_step_timer , 1.0)
+	#else:
+		#_step_timer = 0.0
+	#var bob_sin = sin(_step_timer* 2.0 * PI) *0.5
+	#
+	#if Head_bob and _can_headbob():
+		#var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
+		#angles.x -= pitch_delta
+		#
+		#var roll_delta = bob_sin*deg_to_rad(bob_roll) * speed
+		#angles.z -= roll_delta
+		#
+		#var up_delta = bob_sin * speed * bob_up
+		#offsets.y += up_delta
+	
+	#--------=============sin wave x y axis disp  headbob -====================#
+	
+	if Head_bob:
+		var bob_multiplier = float(Head_bob and Player.is_on_floor() and _can_headbob()) * collider_value
+		current_bob_frquency += bob_frequency*speed*delta
+		current_bob_amplitude = bob_amplitude*speed
+		bob_offset_vector.x = (sin(current_bob_frquency/2.0)*current_bob_amplitude+0.2)*bob_multiplier
+		bob_offset_vector.y = (sin(current_bob_frquency)*current_bob_amplitude - 0.02)*bob_multiplier
+		current_roll = ((sin(current_bob_frquency)*current_bob_amplitude)/2.65)*bob_multiplier
+		offsets.x = lerp(offsets.x , bob_offset_vector.x, delta*lerp_speed)
+		offsets.y = lerp(offsets.y , bob_offset_vector.y/2.0, delta*lerp_speed)
+		angles.z  = lerp(angles.z , deg_to_rad(current_roll) , delta*lerp_speed)
 	rotation = angles
 	position = offsets
 	

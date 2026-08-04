@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://j082prroqfpj"]
+[gd_scene format=3 uid="uid://j082prroqfpj"]
 
-[ext_resource type="Material" uid="uid://c3gt017mgxqdo" path="res://Demo/materials and textures/orange.tres" id="1_kbg81"]
+[ext_resource type="Material" uid="uid://c3gt017mgxqdo" path="res://addons/Demo/materials and textures/orange.tres" id="1_kbg81"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0urgx"]
 size = Vector3(0.9, 0.9, 0.9)
@@ -9,10 +9,11 @@ size = Vector3(0.9, 0.9, 0.9)
 material = ExtResource("1_kbg81")
 size = Vector3(0.9, 0.9, 0.9)
 
-[node name="RigidBoxes" type="RigidBody3D"]
+[node name="RigidBoxes" type="RigidBody3D" unique_id=755011315]
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=25358165]
 shape = SubResource("BoxShape3D_0urgx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1533955922]
 mesh = SubResource("BoxMesh_d5eq7")

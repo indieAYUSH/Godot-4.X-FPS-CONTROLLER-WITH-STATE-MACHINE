@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://5ym40qt2aau8"]
+[gd_scene format=3 uid="uid://5ym40qt2aau8"]
 
 [ext_resource type="Script" uid="uid://bcqieithuf66l" path="res://addons/player/scripts/player.gd" id="1_qvlqn"]
 [ext_resource type="Script" uid="uid://boivvjeleq8ja" path="res://addons/player/scripts/Components/camera_controller_component.gd" id="2_8p4p3"]
@@ -24,8 +24,12 @@
 [ext_resource type="Script" uid="uid://btde2gr5tknd" path="res://addons/player/states/freeze_state.gd" id="15_kvncf"]
 [ext_resource type="Texture2D" uid="uid://c2p4g2rmg3711" path="res://Assests/keyboard_e.svg" id="16_v58eg"]
 [ext_resource type="FontFile" uid="uid://3op67rxtj0f6" path="res://Assests/roboto/Roboto-Black.ttf" id="17_xkm3v"]
+[ext_resource type="Script" uid="uid://bswuqjd74cpgu" path="res://addons/player/scripts/audio_manager.gd" id="25_sp8cr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hu6bb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1wljh"]
+radius = 0.167
 
 [sub_resource type="Animation" id="Animation_iqofo"]
 length = 0.001
@@ -309,130 +313,156 @@ font = ExtResource("17_xkm3v")
 font_size = 20
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mbkfo"]
-height = 1.7
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qvlqn"]
-height = 1.1
+height = 1.221582
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable")]
+[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable")]
+collision_mask = 3
 script = ExtResource("1_qvlqn")
 player_statemachine = NodePath("PlayerStateMachine")
 CameraJuice_Component = NodePath("head/CameraControllerComponent/CameraJuice")
 itme_holdable = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/item_holder")
 
-[node name="head" type="Node3D" parent="."]
+[node name="head" type="Node3D" parent="." unique_id=194443698]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75757813, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 0)
 
-[node name="CameraControllerComponent" type="Node3D" parent="head" node_paths=PackedStringArray("mouse_controller_component", "Player_controller")]
+[node name="CameraControllerComponent" type="Node3D" parent="head" unique_id=1859547802 node_paths=PackedStringArray("mouse_controller_component", "Player_controller")]
 unique_name_in_owner = true
 script = ExtResource("2_8p4p3")
 mouse_controller_component = NodePath("../../Components/MouseControllerComponent")
 Player_controller = NodePath("../..")
 
-[node name="CameraJuice" type="Node3D" parent="head/CameraControllerComponent" node_paths=PackedStringArray("camera", "Player")]
+[node name="CameraJuice" type="Node3D" parent="head/CameraControllerComponent" unique_id=878500802 node_paths=PackedStringArray("camera", "Player", "left_collision_checker", "right_collision_checker")]
 script = ExtResource("3_iqofo")
 camera = NodePath("rot_pivot/Camera3D")
 Camera_tilt = true
 Head_bob = true
+camer_fov_changes = true
 Player = NodePath("../../..")
+lerp_speed = 12.0
 bob_pitch = 0.04
 bob_roll = 0.03
 bob_up = 0.003
 bob_frequncy = 5.0
+bob_frequency = 1.7
+bob_amplitude = 0.1
+left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
+right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
 
-[node name="rot_pivot" type="Node3D" parent="head/CameraControllerComponent/CameraJuice"]
+[node name="rot_pivot" type="Node3D" parent="head/CameraControllerComponent/CameraJuice" unique_id=589527271]
 unique_name_in_owner = true
 
-[node name="Camera3D" type="Camera3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot"]
+[node name="Camera3D" type="Camera3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot" unique_id=1253014890]
 unique_name_in_owner = true
 
-[node name="Interraction_Ray_cast" type="RayCast3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D"]
+[node name="Interraction_Ray_cast" type="RayCast3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=2048973226]
 target_position = Vector3(0, 0, -3)
 collide_with_areas = true
 
-[node name="item_holder" type="Node3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D"]
+[node name="item_holder" type="Node3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=998206079]
 script = ExtResource("4_1vt7l")
 context_override = true
 input_prompt_override = "Drop"
 input_icon = ExtResource("5_44c10")
 item_resource = Array[ExtResource("5_t4wwt")]([ExtResource("5_ygc1f")])
 
-[node name="obstacle_checker" type="Node3D" parent="head/CameraControllerComponent"]
+[node name="obstacle_checker" type="Node3D" parent="head/CameraControllerComponent" unique_id=646212523]
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker"]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker" unique_id=1691650619]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0815711, 0)
 shape = SubResource("SphereShape3D_hu6bb")
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
-[node name="pos_place_holder" type="Node3D" parent="head"]
+[node name="LnRcollision" type="Node3D" parent="head/CameraControllerComponent/obstacle_checker" unique_id=139052779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3096509, 0)
+
+[node name="Lobschecker" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker/LnRcollision" unique_id=1029935765]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64993507, -0.155, 0)
+shape = SubResource("SphereShape3D_1wljh")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
+
+[node name="RObscheckr" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker/LnRcollision" unique_id=1894245337]
+unique_name_in_owner = true
+transform = Transform3D(0.99990255, 0, 0.01396218, 0, 1, 0, -0.01396218, 0, 0.99990255, 0.6903192, -0.155, 0)
+shape = SubResource("SphereShape3D_1wljh")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
+
+[node name="pos_place_holder" type="Node3D" parent="head" unique_id=2106155273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.6431665)
 
-[node name="pos_place_holder2" type="Node3D" parent="head"]
+[node name="pos_place_holder2" type="Node3D" parent="head" unique_id=956108316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55368423)
 
-[node name="Components" type="Node" parent="."]
+[node name="Components" type="Node" parent="." unique_id=1451967956]
 
-[node name="MouseControllerComponent" type="Node" parent="Components" node_paths=PackedStringArray("camera_controller")]
+[node name="MouseControllerComponent" type="Node" parent="Components" unique_id=1245595419 node_paths=PackedStringArray("camera_controller")]
 script = ExtResource("3_4eyqk")
 mouse_senstivity = 0.003
 camera_controller = NodePath("../../head/CameraControllerComponent")
 
-[node name="PlayerInterractionRay" type="Node" parent="Components" node_paths=PackedStringArray("interaction_raycast")]
+[node name="PlayerInterractionRay" type="Node" parent="Components" unique_id=1938175511 node_paths=PackedStringArray("interaction_raycast")]
 script = ExtResource("5_vd5ca")
 interaction_raycast = NodePath("../../head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/Interraction_Ray_cast")
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="PlayerStateMachine" type="Node" parent="." unique_id=338015821 node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_gp3q6")
 current_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://2ykdhxibejv1"
 
-[node name="IdleState" type="Node" parent="PlayerStateMachine"]
+[node name="IdleState" type="Node" parent="PlayerStateMachine" unique_id=1110606584]
 script = ExtResource("5_tblmv")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="WalkState" type="Node" parent="PlayerStateMachine"]
+[node name="WalkState" type="Node" parent="PlayerStateMachine" unique_id=219710861]
 script = ExtResource("6_tblmv")
+speed = 8.5
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="SprintState" type="Node" parent="PlayerStateMachine"]
+[node name="SprintState" type="Node" parent="PlayerStateMachine" unique_id=1776400121]
 script = ExtResource("7_263ev")
+speed = 13.0
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="CrouchState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("CameraController")]
+[node name="CrouchState" type="Node" parent="PlayerStateMachine" unique_id=470314354 node_paths=PackedStringArray("CameraController")]
 script = ExtResource("8_blwvw")
 CameraController = NodePath("../../head/CameraControllerComponent")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="JumpState" type="Node" parent="PlayerStateMachine"]
+[node name="JumpState" type="Node" parent="PlayerStateMachine" unique_id=486693409]
 script = ExtResource("9_hu6bb")
+speed = 7.0
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="SlideState" type="Node" parent="PlayerStateMachine"]
+[node name="SlideState" type="Node" parent="PlayerStateMachine" unique_id=2100855296]
 script = ExtResource("10_nfsas")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="FallingState" type="Node" parent="PlayerStateMachine"]
+[node name="FallingState" type="Node" parent="PlayerStateMachine" unique_id=1690328108]
 script = ExtResource("13_xsu4s")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="DashState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("camera", "DashCoolDownTimer")]
+[node name="DashState" type="Node" parent="PlayerStateMachine" unique_id=677291627 node_paths=PackedStringArray("camera", "DashCoolDownTimer")]
 script = ExtResource("14_w2vqi")
 camera = NodePath("../../head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D")
 DashCoolDownTimer = NodePath("../../TimersHolderComponent/DashCoolDown")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="FreezeState" type="Node" parent="PlayerStateMachine"]
+[node name="FreezeState" type="Node" parent="PlayerStateMachine" unique_id=448118017]
 script = ExtResource("15_kvncf")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
-[node name="Debug_ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("PLayer")]
+[node name="Debug_ui" type="CanvasLayer" parent="." unique_id=1470571746 node_paths=PackedStringArray("PLayer")]
 script = ExtResource("7_tblmv")
 PLayer = NodePath("..")
 
-[node name="Control" type="Control" parent="Debug_ui"]
+[node name="Control" type="Control" parent="Debug_ui" unique_id=764024218]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -441,66 +471,64 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Debug_ui/Control"]
+[node name="Panel" type="Panel" parent="Debug_ui/Control" unique_id=97509093]
 layout_mode = 0
 offset_right = 242.0
 offset_bottom = 128.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Debug_ui/Control/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug_ui/Control/Panel" unique_id=316164796]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer" unique_id=24136976]
 layout_mode = 2
 
-[node name="fps_meter" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="fps_meter" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/HBoxContainer" unique_id=582372199]
 layout_mode = 2
 text = "FPS:"
 
-[node name="FPS_DATA" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="FPS_DATA" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/HBoxContainer" unique_id=1641208472]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="state_container" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer"]
+[node name="state_container" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer" unique_id=1821691612]
 layout_mode = 2
 
-[node name="States" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/state_container"]
+[node name="States" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/state_container" unique_id=1488492623]
 layout_mode = 2
 text = "CurrentState:"
 
-[node name="state_data" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/state_container"]
+[node name="state_data" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/state_container" unique_id=1382198784]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Player_speed_container" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer"]
+[node name="Player_speed_container" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer" unique_id=610953126]
 layout_mode = 2
 
-[node name="speed" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container"]
+[node name="speed" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container" unique_id=514172513]
 layout_mode = 2
 text = "SPEED:"
 
-[node name="speed_data" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container"]
+[node name="speed_data" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container" unique_id=1178550582]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Player_speed_container_vertical" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer"]
+[node name="Player_speed_container_vertical" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer" unique_id=973632635]
 layout_mode = 2
 
-[node name="speed" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container_vertical"]
+[node name="speed" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container_vertical" unique_id=1420009819]
 layout_mode = 2
 text = "SPEED(vert):"
 
-[node name="speed_data_vertical" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container_vertical"]
+[node name="speed_data_vertical" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container_vertical" unique_id=1314873922]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PlayerAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_h4jra")
-}
+[node name="PlayerAnimation" type="AnimationPlayer" parent="." unique_id=941234507]
+libraries/ = SubResource("AnimationLibrary_h4jra")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1665197320]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -509,7 +537,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="UICrosshair" type="CenterContainer" parent="UI" node_paths=PackedStringArray("crosshair_lines", "Player")]
+[node name="UICrosshair" type="CenterContainer" parent="UI" unique_id=1999285471 node_paths=PackedStringArray("crosshair_lines", "Player")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -526,23 +554,23 @@ script = ExtResource("13_h4jra")
 crosshair_lines = [NodePath("top"), NodePath("left"), NodePath("right"), NodePath("bottom")]
 Player = NodePath("../..")
 
-[node name="top" type="Line2D" parent="UI/UICrosshair"]
+[node name="top" type="Line2D" parent="UI/UICrosshair" unique_id=1715867199]
 points = PackedVector2Array(0, -5, 0, -15)
 width = 3.0
 
-[node name="left" type="Line2D" parent="UI/UICrosshair"]
+[node name="left" type="Line2D" parent="UI/UICrosshair" unique_id=1493480086]
 points = PackedVector2Array(-5, 0, -15, 0)
 width = 3.0
 
-[node name="right" type="Line2D" parent="UI/UICrosshair"]
+[node name="right" type="Line2D" parent="UI/UICrosshair" unique_id=1208226276]
 points = PackedVector2Array(5, 0, 15, 0)
 width = 3.0
 
-[node name="bottom" type="Line2D" parent="UI/UICrosshair"]
+[node name="bottom" type="Line2D" parent="UI/UICrosshair" unique_id=1028171794]
 points = PackedVector2Array(0, 5, 0, 15)
 width = 3.0
 
-[node name="ContextComponent" type="CenterContainer" parent="UI" node_paths=PackedStringArray("input_promt_icon", "input_prompt", "warning_reffrence", "UIAnimationPlayer")]
+[node name="ContextComponent" type="CenterContainer" parent="UI" unique_id=158938736 node_paths=PackedStringArray("input_promt_icon", "input_prompt", "warning_reffrence", "UIAnimationPlayer")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.010416667
@@ -559,28 +587,26 @@ warning_reffrence = NodePath("../warning")
 UIAnimationPlayer = NodePath("../UiAnimations")
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ContextComponent"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ContextComponent" unique_id=1824013317]
 layout_mode = 2
 
-[node name="InputTex" type="TextureRect" parent="UI/ContextComponent/HBoxContainer"]
+[node name="InputTex" type="TextureRect" parent="UI/ContextComponent/HBoxContainer" unique_id=738177392]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("16_v58eg")
 expand_mode = 1
 
-[node name="InputPrompt" type="Label" parent="UI/ContextComponent/HBoxContainer"]
+[node name="InputPrompt" type="Label" parent="UI/ContextComponent/HBoxContainer" unique_id=1716105123]
 layout_mode = 2
 text = "THIS IA A BOX HEEH"
 label_settings = SubResource("LabelSettings_xsu4s")
 horizontal_alignment = 2
 
-[node name="UiAnimations" type="AnimationPlayer" parent="UI"]
-libraries = {
-&"": SubResource("AnimationLibrary_1vt7l")
-}
+[node name="UiAnimations" type="AnimationPlayer" parent="UI" unique_id=1476229548]
+libraries/ = SubResource("AnimationLibrary_1vt7l")
 
-[node name="warning" type="Label" parent="UI"]
+[node name="warning" type="Label" parent="UI" unique_id=2135319974]
 layout_mode = 0
 offset_left = 817.0
 offset_top = 284.0
@@ -589,17 +615,32 @@ offset_bottom = 308.0004
 text = "this is a warning"
 label_settings = SubResource("LabelSettings_kvncf")
 
-[node name="TimersHolderComponent" type="Node3D" parent="."]
+[node name="TimersHolderComponent" type="Node3D" parent="." unique_id=161856373]
 
-[node name="DashCoolDown" type="Timer" parent="TimersHolderComponent"]
+[node name="DashCoolDown" type="Timer" parent="TimersHolderComponent" unique_id=1484012505]
 
-[node name="uncrouched_collision_shape" type="CollisionShape3D" parent="."]
+[node name="uncrouched_collision_shape" type="CollisionShape3D" parent="." unique_id=1718317768]
 shape = SubResource("CapsuleShape3D_mbkfo")
 
-[node name="crouched_collsion_shape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2991699, 0)
+[node name="crouched_collsion_shape" type="CollisionShape3D" parent="." unique_id=600408152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37819394, 0)
 shape = SubResource("CapsuleShape3D_qvlqn")
 disabled = true
+
+[node name="AudioManager" type="Node3D" parent="." unique_id=1679738778]
+script = ExtResource("25_sp8cr")
+
+[node name="crouch" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1609440747]
+
+[node name="uncrouch" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1141294854]
+
+[node name="walk" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=960559123]
+
+[node name="jump" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1805015295]
+
+[node name="land" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=862187330]
+
+[node name="slide" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=256370045]
 
 [connection signal="state_changed" from="PlayerStateMachine" to="Debug_ui" method="_on_player_state_machine_state_changed"]
 [connection signal="timeout" from="TimersHolderComponent/DashCoolDown" to="PlayerStateMachine/DashState" method="_on_dash_cool_down_timeout"]

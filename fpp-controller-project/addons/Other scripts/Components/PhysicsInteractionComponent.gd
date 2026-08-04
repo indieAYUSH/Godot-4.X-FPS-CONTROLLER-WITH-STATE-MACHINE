@@ -10,6 +10,9 @@ extends Node
 @export_category("Variables")
 @export var max_applied_force : float = 10.0
 
+func _ready() -> void:
+	controller_body = owner
+
 func _physics_process(delta):
 	if not enabled or not controller_body:
 		return

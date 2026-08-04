@@ -1,10 +1,9 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://jm4tiq4lln34"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://jm4tiq4lln34"]
 
-[ext_resource type="Texture2D" uid="uid://do45l5tw6jqdm" path="res://Demo/materials and textures/GreyboxTextures/greybox_dark_solid.png" id="1_y05va"]
+[ext_resource type="Texture2D" uid="uid://do45l5tw6jqdm" path="res://addons/Demo/materials and textures/GreyboxTextures/greybox_dark_solid.png" id="1_y05va"]
 
 [resource]
 albedo_texture = ExtResource("1_y05va")
-roughness = 0.62
 uv1_triplanar = true
 uv1_world_triplanar = true
 uv2_triplanar = true

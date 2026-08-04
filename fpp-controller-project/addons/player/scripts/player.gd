@@ -10,6 +10,8 @@ const JUMP_VELOCITY = 4.5
 @onready var uncrouched_collision_shape = $uncrouched_collision_shape
 @onready var obstacle_checker = %ShapeCast3D
 @onready var player_animation = $PlayerAnimation
+@onready var lobschecker: ShapeCast3D = %Lobschecker
+@onready var r_obscheckr: ShapeCast3D = %RObscheckr
 
 @export_category("Component Refrences")
 @export var player_statemachine : StateMachine
@@ -33,6 +35,8 @@ signal unfreezeplayer
 
 func _ready():
 	obstacle_checker.add_exception(self)
+	lobschecker.add_exception(self)
+	r_obscheckr.add_exception(self)
 	Global.Player = self
 	
 func _physics_process(delta):

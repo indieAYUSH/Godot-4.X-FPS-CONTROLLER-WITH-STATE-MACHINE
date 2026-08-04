@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bou00x630601y"]
+[gd_scene format=4 uid="uid://bou00x630601y"]
 
 [ext_resource type="Material" uid="uid://jm4tiq4lln34" path="res://addons/Demo/materials and textures/black.tres" id="1_p8l25"]
 [ext_resource type="PackedScene" uid="uid://5ym40qt2aau8" path="res://addons/player/scene/player.tscn" id="1_psk1g"]
@@ -30,15 +30,15 @@ ambient_light_source = 3
 ambient_light_sky_contribution = 0.28
 tonemap_mode = 3
 tonemap_white = 2.55
+sdfgi_use_occlusion = true
 glow_normalized = true
 glow_intensity = 0.54
 glow_bloom = 0.35
-glow_blend_mode = 1
-fog_enabled = true
 fog_sun_scatter = 1.0
 fog_density = 0.002
 fog_sky_affect = 0.0
-volumetric_fog_density = 0.008
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
 volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dic71"]
@@ -123,173 +123,183 @@ size = Vector3(1.2, 1.2, 1.2)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mpuh8"]
 points = PackedVector3Array(-0.59999996, -0.5999997, -0.5999997, 0.5999723, 0.59999996, 0.59999996, 0.5999723, 0.59999996, -0.59999996, 0.5999723, -0.59999996, 0.59999996, -0.59999996, 0.5999997, 0.5999997, 0.5999723, -0.59999996, -0.59999996, -0.59999996, -0.5999997, 0.5999997, -0.59999996, 0.5999997, -0.5999997)
 
-[node name="PrototypingDemo" type="Node3D"]
+[sub_resource type="FogMaterial" id="FogMaterial_1wljh"]
+density = 0.09
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="PrototypingDemo" type="Node3D" unique_id=1996102329]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1751336459]
 environment = SubResource("Environment_5entq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1795999295]
 transform = Transform3D(-0.86602354, -0.43301603, 0.25000075, 0.043865036, 0.43227336, 0.90067524, -0.49807546, 0.7909722, -0.35536462, 0, 5.9353857, 0)
-light_color = Color(1, 0.8392764, 0.7079702, 1)
+light_color = Color(0.99531037, 0.9001154, 0.7941355, 1)
+light_energy = 2.0
 shadow_enabled = true
 
-[node name="floor" type="Node3D" parent="."]
+[node name="floor" type="Node3D" parent="." unique_id=672196059]
 
-[node name="floor_csg" type="CSGBox3D" parent="floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039211273, -0.023160934, -0.026693344)
+[node name="floor_csg" type="CSGBox3D" parent="floor" unique_id=289391184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.075495005, -0.02315998, 0.023803711)
 use_collision = true
+collision_layer = 3
 size = Vector3(100, 1, 100)
 material = ExtResource("1_p8l25")
 
-[node name="Player" parent="." instance=ExtResource("1_psk1g")]
+[node name="Player" parent="." unique_id=112954239 instance=ExtResource("1_psk1g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3343, 0)
 
-[node name="walls" type="Node3D" parent="."]
+[node name="walls" type="Node3D" parent="." unique_id=2109925711]
 
-[node name="boundaryWall" type="CSGBox3D" parent="walls"]
+[node name="boundaryWall" type="CSGBox3D" parent="walls" unique_id=1613171014]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 49)
 use_collision = true
 size = Vector3(100, 4, 1)
 material = ExtResource("1_p8l25")
 
-[node name="boundaryWall2" type="CSGBox3D" parent="walls"]
+[node name="boundaryWall2" type="CSGBox3D" parent="walls" unique_id=1194035800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -49)
 use_collision = true
 size = Vector3(100, 4, 1)
 material = ExtResource("1_p8l25")
 
-[node name="boundaryWall3" type="CSGBox3D" parent="walls"]
+[node name="boundaryWall3" type="CSGBox3D" parent="walls" unique_id=419229936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49, 2, 0)
 use_collision = true
 size = Vector3(1, 4, 100)
 material = ExtResource("1_p8l25")
 
-[node name="boundaryWall4" type="CSGBox3D" parent="walls"]
+[node name="boundaryWall4" type="CSGBox3D" parent="walls" unique_id=1072602295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 2, 0)
 use_collision = true
 size = Vector3(1, 4, 100)
 material = ExtResource("1_p8l25")
 
-[node name="Props" type="Node3D" parent="."]
+[node name="Props" type="Node3D" parent="." unique_id=489717254]
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Props"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Props" unique_id=1950813961]
 mesh = SubResource("ArrayMesh_dic71")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Props/CSGBakedMeshInstance3D"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Props/CSGBakedMeshInstance3D" unique_id=1074083691]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/CSGBakedMeshInstance3D/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/CSGBakedMeshInstance3D/StaticBody3D2" unique_id=1577770875]
 shape = SubResource("ConcavePolygonShape3D_w16u2")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Props"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Props" unique_id=477912270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.470355, 0)
 use_collision = true
 size = Vector3(4, 4, 4)
 material = SubResource("StandardMaterial3D_ik3e0")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Props"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Props" unique_id=2074587660]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4500532, 7.663974)
 use_collision = true
 size = Vector3(4, 4, 4)
 material = SubResource("StandardMaterial3D_shq4a")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Props"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Props" unique_id=647240846]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.370981, 2.852117, 6.749448)
 use_collision = true
 size = Vector3(3, 1.7236328, 3)
 material = SubResource("StandardMaterial3D_n6yo8")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Props"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Props" unique_id=606479570]
 transform = Transform3D(1.21, 0, 0, 0, 1.21, 0, 0, 0, 1.21, -6.835419, 2.6168501, 8.118723)
 use_collision = true
 polygon = PackedVector2Array(-3.1031504, -1.6649401, -0.41627455, 1.0281806, 1.018321, 0.9070444, 1, 0, -0.098445415, 0.71138453, -2.943182, -1.5647829)
 depth = 2.04
 material = SubResource("StandardMaterial3D_ty24u")
 
-[node name="props_boxes" type="Node3D" parent="."]
+[node name="props_boxes" type="Node3D" parent="." unique_id=696565653]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.462444, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="props_boxes"]
+[node name="StaticBody3D" type="StaticBody3D" parent="props_boxes" unique_id=452861403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52972794, 0.053916693, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="props_boxes/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props_boxes/StaticBody3D" unique_id=17673110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0679737, 0)
 mesh = SubResource("BoxMesh_ik3e0")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="props_boxes/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props_boxes/StaticBody3D" unique_id=1658930394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0679737, 0)
 shape = SubResource("ConvexPolygonShape3D_shq4a")
 
-[node name="InteractionComponent" type="Node" parent="props_boxes/StaticBody3D"]
+[node name="InteractionComponent" type="Node" parent="props_boxes/StaticBody3D" unique_id=1895485100]
 script = ExtResource("6_xdb4v")
 input_prompt = "open box"
 metadata/_custom_type_script = "uid://pdgu0t75jx23"
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="props_boxes"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="props_boxes" unique_id=2022882055]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.053545, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="props_boxes/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props_boxes/StaticBody3D2" unique_id=790712255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0777043, 0)
 mesh = SubResource("BoxMesh_4exgu")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="props_boxes/StaticBody3D2"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="props_boxes/StaticBody3D2" unique_id=830266210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0777043, 0)
 shape = SubResource("ConvexPolygonShape3D_4wtxo")
 
-[node name="InteractionComponent" type="Node" parent="props_boxes/StaticBody3D2"]
+[node name="InteractionComponent" type="Node" parent="props_boxes/StaticBody3D2" unique_id=2137459422]
 script = ExtResource("6_xdb4v")
 input_prompt = "hehe this is a box"
 metadata/_custom_type_script = "uid://pdgu0t75jx23"
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="props_boxes"]
+[node name="StaticBody3D3" type="StaticBody3D" parent="props_boxes" unique_id=188084731]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8153152, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="props_boxes/StaticBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props_boxes/StaticBody3D3" unique_id=570207728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0684639, 0)
 mesh = SubResource("BoxMesh_xw4th")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="props_boxes/StaticBody3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props_boxes/StaticBody3D3" unique_id=1027885149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0684639, 0)
 shape = SubResource("ConvexPolygonShape3D_mpuh8")
 
-[node name="InteractionComponent" type="Node" parent="props_boxes/StaticBody3D3"]
+[node name="InteractionComponent" type="Node" parent="props_boxes/StaticBody3D3" unique_id=1357531305]
 script = ExtResource("6_xdb4v")
 input_prompt = "This is a red box"
 input_icon = ExtResource("8_ik3e0")
 override = true
 metadata/_custom_type_script = "uid://pdgu0t75jx23"
 
-[node name="Rotating_Doors" parent="props_boxes/StaticBody3D3" instance=ExtResource("9_shq4a")]
+[node name="Rotating_Doors" parent="props_boxes/StaticBody3D3" unique_id=456050067 instance=ExtResource("9_shq4a")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.8363686, 0.47684002, 13.505562)
 
-[node name="Rotating_Doors2" parent="props_boxes/StaticBody3D3" instance=ExtResource("9_shq4a")]
+[node name="Rotating_Doors2" parent="props_boxes/StaticBody3D3" unique_id=768715239 instance=ExtResource("9_shq4a")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -6.585865, 0.47684002, 13.505562)
 
-[node name="SlidingDoors" parent="props_boxes/StaticBody3D3" instance=ExtResource("10_wnl5g")]
+[node name="SlidingDoors" parent="props_boxes/StaticBody3D3" unique_id=778790304 instance=ExtResource("10_wnl5g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.382385, 0.44256067, 18.462002)
 
-[node name="BoneFire" parent="props_boxes/StaticBody3D3" instance=ExtResource("11_dic71")]
+[node name="BoneFire" parent="props_boxes/StaticBody3D3" unique_id=462669159 instance=ExtResource("11_dic71")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0867, 0.9054642, 15.17363)
 
-[node name="Ball" parent="props_boxes" instance=ExtResource("10_ty24u")]
+[node name="Ball" parent="props_boxes" unique_id=1613990020 instance=ExtResource("10_ty24u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5433328, 0)
 
-[node name="Ball2" parent="props_boxes" instance=ExtResource("10_ty24u")]
+[node name="Ball2" parent="props_boxes" unique_id=402396280 instance=ExtResource("10_ty24u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5433328, 3.520756)
 
-[node name="RigidBoxes" parent="props_boxes" instance=ExtResource("11_jipm5")]
+[node name="RigidBoxes" parent="props_boxes" unique_id=1975350011 instance=ExtResource("11_jipm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0930474, 2.2348394)
 
-[node name="RigidBoxesMedium" parent="props_boxes" instance=ExtResource("11_jipm5")]
+[node name="RigidBoxesMedium" parent="props_boxes" unique_id=171331052 instance=ExtResource("11_jipm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93438196, 5.613037)
 
-[node name="RigidBoxesMedium2" parent="props_boxes" instance=ExtResource("11_jipm5")]
+[node name="RigidBoxesMedium2" parent="props_boxes" unique_id=615877612 instance=ExtResource("11_jipm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0930474, 7.6646204)
 
-[node name="Map" type="Node3D" parent="."]
+[node name="Map" type="Node3D" parent="." unique_id=970697694]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.034122, 0, 22.332287)
 
-[node name="SlidingDoors" parent="Map" instance=ExtResource("12_jipm5")]
+[node name="SlidingDoors" parent="Map" unique_id=1911392622 instance=ExtResource("12_jipm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48313665, 0)
 
-[node name="key_demo" parent="." instance=ExtResource("14_71soq")]
+[node name="key_demo" parent="." unique_id=640960736 instance=ExtResource("14_71soq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.364191, 0.8268391, 13.680412)
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=304872989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.916117, 2.948176, 22.082369)
+size = Vector3(4, 4.062622, 9.98)
+material = SubResource("FogMaterial_1wljh")
