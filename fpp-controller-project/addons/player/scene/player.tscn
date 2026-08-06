@@ -24,7 +24,10 @@
 [ext_resource type="Script" uid="uid://btde2gr5tknd" path="res://addons/player/states/freeze_state.gd" id="15_kvncf"]
 [ext_resource type="Texture2D" uid="uid://c2p4g2rmg3711" path="res://Assests/keyboard_e.svg" id="16_v58eg"]
 [ext_resource type="FontFile" uid="uid://3op67rxtj0f6" path="res://Assests/roboto/Roboto-Black.ttf" id="17_xkm3v"]
+[ext_resource type="Script" uid="uid://do0xiouc1nara" path="res://addons/player/scene/wall_run_state.gd" id="20_d7dwe"]
 [ext_resource type="Script" uid="uid://bswuqjd74cpgu" path="res://addons/player/scripts/audio_manager.gd" id="25_sp8cr"]
+[ext_resource type="AudioStream" uid="uid://de5x0p314lijy" path="res://Assests/soundfx/movementSfx/sfx_step_grass_l.mp3" id="26_r5ose"]
+[ext_resource type="AudioStream" uid="uid://bvv3hnwcmeoeu" path="res://Assests/soundfx/movementSfx/sfx_step_grass_r.mp3" id="27_d7dwe"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hu6bb"]
 
@@ -317,6 +320,11 @@ font_size = 20
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qvlqn"]
 height = 1.221582
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4ywcr"]
+streams_count = 2
+stream_0/stream = ExtResource("26_r5ose")
+stream_1/stream = ExtResource("27_d7dwe")
+
 [node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable")]
 collision_mask = 3
 script = ExtResource("1_qvlqn")
@@ -347,7 +355,7 @@ bob_roll = 0.03
 bob_up = 0.003
 bob_frequncy = 5.0
 bob_frequency = 1.7
-bob_amplitude = 0.1
+bob_amplitude = 0.08
 left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
 right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
 
@@ -456,6 +464,10 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="FreezeState" type="Node" parent="PlayerStateMachine" unique_id=448118017]
 script = ExtResource("15_kvncf")
+metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
+
+[node name="WallRunState" type="Node" parent="PlayerStateMachine" unique_id=1075575694]
+script = ExtResource("20_d7dwe")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="Debug_ui" type="CanvasLayer" parent="." unique_id=1470571746 node_paths=PackedStringArray("PLayer")]
@@ -627,20 +639,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37819394, 0)
 shape = SubResource("CapsuleShape3D_qvlqn")
 disabled = true
 
-[node name="AudioManager" type="Node3D" parent="." unique_id=1679738778]
+[node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
 script = ExtResource("25_sp8cr")
+bob_frequency = 1.8399999999999999
+bob_amplitude = 0.09
+bob_smoothing = 12.0
+movement_audio_player = NodePath("walk")
+crouch_audio_player = NodePath("crouch")
+uncrouch_audio_player = NodePath("uncrouch")
+jump_audio_player = NodePath("jump")
+land_audio_player = NodePath("land")
+slide_audio_player = NodePath("slide")
+player_controller = NodePath("..")
+surface_checker_cast = NodePath("surface_cast")
 
 [node name="crouch" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1609440747]
 
 [node name="uncrouch" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1141294854]
 
 [node name="walk" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=960559123]
+stream = SubResource("AudioStreamRandomizer_4ywcr")
 
 [node name="jump" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1805015295]
 
 [node name="land" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=862187330]
 
 [node name="slide" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=256370045]
+
+[node name="surface_cast" type="RayCast3D" parent="AudioManager" unique_id=1304080068 groups=["sdio_player"]]
 
 [connection signal="state_changed" from="PlayerStateMachine" to="Debug_ui" method="_on_player_state_machine_state_changed"]
 [connection signal="timeout" from="TimersHolderComponent/DashCoolDown" to="PlayerStateMachine/DashState" method="_on_dash_cool_down_timeout"]

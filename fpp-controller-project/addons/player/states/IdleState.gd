@@ -1,9 +1,11 @@
 class_name IdleState extends PlayerMovementState
 
 @export_category("Movement vars")
-@export var speed : float = 7.5
+@export var speed : float = 7.0
 @export var acceleration : float = 0.15
 @export var deacceleration : float  = 0.25
+@export var gravity_multiplier : float = 1.0
+
 
 
 
@@ -23,13 +25,10 @@ func _update(delta):
 
 
 func physics_update(delta : float)-> void:
-	Player.update_gravity(delta)
+	Player.update_gravity(delta , gravity_multiplier)
 	Player.update_movement(speed , acceleration , deacceleration)
 	
 
 func _input_update(event ):
 	if  event.is_action_pressed("Dash") and Player.can_dash :
 		change_state.emit("DashState")
-	
-	if event.is_action_pressed("ui_accept")  and Player.is_on_floor():
-		print("oh")

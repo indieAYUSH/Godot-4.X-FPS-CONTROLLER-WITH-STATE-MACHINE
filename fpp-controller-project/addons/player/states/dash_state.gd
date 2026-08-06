@@ -6,7 +6,7 @@ extends PlayerMovementState
 @export var dash_speed : float = 38.0
 #@export var acceleration : float = 0.95
 #@export var deacceleration : float = 10.0
-
+@export var gravity_multiplier : float = 1.0
 
 
 @export_category("Camera var")
@@ -43,7 +43,7 @@ func _update(delta : float) -> void:
 			change_state.emit("IdleState")
 
 func physics_update(delta : float)-> void:
-	Player.update_gravity(delta)
+	Player.update_gravity(delta , gravity_multiplier)
 	Player.dash(dir , dash_speed)
 
 

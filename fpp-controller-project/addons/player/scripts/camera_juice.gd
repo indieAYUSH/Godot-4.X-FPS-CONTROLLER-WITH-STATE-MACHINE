@@ -112,6 +112,9 @@ func camera_effects_manager(delta:float) -> void:
 		offsets.x = lerp(offsets.x , bob_offset_vector.x, delta*lerp_speed)
 		offsets.y = lerp(offsets.y , bob_offset_vector.y/2.0, delta*lerp_speed)
 		angles.z  = lerp(angles.z , deg_to_rad(current_roll) , delta*lerp_speed)
+		#if speed <= 0.1:
+			#offsets = Vector3.ZERO
+			#angles = Vector3.ZERO
 	rotation = angles
 	position = offsets
 	

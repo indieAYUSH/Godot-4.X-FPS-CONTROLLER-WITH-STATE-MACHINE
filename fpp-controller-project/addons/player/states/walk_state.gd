@@ -4,7 +4,7 @@ class_name WalkState extends PlayerMovementState
 @export var speed : float = 7.5
 @export var acceleration : float = 0.15
 @export var deacceleration : float  = 0.3
-
+@export var gravity_multiplier : float = 1.0
 
 func _update(delta:float):
 	if Player.velocity.length() < 0.01 :
@@ -23,7 +23,9 @@ func _update(delta:float):
 		change_state.emit("FallingState")
 	if  Input.is_action_just_pressed("Dash") and Player.can_dash :
 		change_state.emit("DashState")
+	
+
 
 func physics_update(delta : float)-> void:
 	Player.update_movement(speed , acceleration , deacceleration)
-	Player.update_gravity(delta)
+	Player.update_gravity(delta , gravity_multiplier)

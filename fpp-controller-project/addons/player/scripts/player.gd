@@ -66,9 +66,9 @@ func update_movement(_speed : float , _acceleration : float , Deacceleration :fl
 
 
 
-func update_gravity(delta):
+func update_gravity(delta , _gravity_multiplier : float):
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * _gravity_multiplier
 
 
 func crouch():

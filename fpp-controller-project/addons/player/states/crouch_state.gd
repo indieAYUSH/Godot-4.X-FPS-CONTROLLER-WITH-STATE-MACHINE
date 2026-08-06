@@ -6,7 +6,7 @@ class_name  CrouchState  extends PlayerMovementState
 @export var deacceleration : float  = 0.3
 
 @export var toggle_crouch : bool
-
+@export var gravity_multiplier : float = 1.0
 
 
 @onready var crouch_shape_cast = %ShapeCast3D
@@ -29,7 +29,7 @@ func _update(delta : float) -> void:
 
 
 func physics_update(delta : float)-> void:
-	Player.update_gravity(delta)
+	Player.update_gravity(delta , gravity_multiplier)
 	Player.update_movement(speed,acceleration , deacceleration)
 
 func exit()-> void:

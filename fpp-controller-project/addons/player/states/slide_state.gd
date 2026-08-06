@@ -5,6 +5,7 @@ class_name SlideState extends PlayerMovementState
 @export var sliding_timer_max : float = 1.2
 @export var acceleration : float = 0.15
 @export var deacceleration : float = 0.3
+@export var gravity_multiplier : float = 1.0
 var sliding_timer
 
 @export var lerp_Speed : float = 10.0
@@ -25,8 +26,8 @@ func enter()->void:
 func physics_update(delta : float)-> void:
 
 	sliding_timer-= delta
-	Player.update_gravity(delta)
-	Player.update_movement((sliding_timer+0.1)*sliding_speed , acceleration , deacceleration)
+	Player.update_gravity(delta , gravity_multiplier)
+	Player.update_movement((sliding_timer+0.4)*sliding_speed , acceleration , deacceleration)
 	
 	if sliding_timer <= 0.0:
 		if Player.input_dir != Vector2.ZERO:
@@ -35,6 +36,9 @@ func physics_update(delta : float)-> void:
 			change_state.emit("IdleState")
 	if Input.is_action_just_pressed("jump"):
 		change_state.emit("JumpState")
+	
+	if Player.is_on_wall():
+		change_state.emit("IdleState")
 
 
 func exit()-> void:
