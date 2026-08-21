@@ -43,17 +43,17 @@ var bob_offset_vector : Vector2
 var target_fov : float
 @export var base_fov :float = 85.0
 @export var max_fov : float  = 110.0
-@export var player_max_sped : float
+@export var player_max_sped : float = 20.0
 
 var rot_pivot_amount : float = 0.0
 var rot_pivot_x_rot_amount : float = 0.0
 
 
-func _ready():
-	target_fov = base_fov
+
 
 func _process(delta):
 	camera_effects_manager(delta)
+	fov_manager(delta)
 
 
 func camera_effects_manager(delta:float) -> void:
@@ -92,9 +92,6 @@ func camera_effects_manager(delta:float) -> void:
 			#angles = Vector3.ZERO
 	rotation = angles
 	position = offsets
-	
-	camera.fov = lerp(camera.fov , target_fov , lerp_speed*delta)
-	
 	#=================Rotation pivot settings================#
 	rot_pivot.rotation.z = lerp(rot_pivot.rotation.z , deg_to_rad(rot_pivot_amount) , lerp_speed*delta)
 	rot_pivot.rotation.x = lerp(rot_pivot.rotation.x , deg_to_rad(rot_pivot_x_rot_amount) , lerp_speed*delta)
@@ -102,7 +99,10 @@ func camera_effects_manager(delta:float) -> void:
 
 
 func fov_manager(delta:float) -> void:
-	pass
+	var speed_ratio = clamp(Player.velocity.length()/player_max_sped , 0.0 , 1.0)
+	target_fov = lerp(base_fov , max_fov , speed_ratio)
+	#target_fov = clamp(target_fov , base_fov , max_fov)
+	camera.fov = lerp(camera.fov, target_fov , delta*lerp_speed)
 
 func rot_pivot_manager(amount:float) -> void:
 	rot_pivot_amount = amount

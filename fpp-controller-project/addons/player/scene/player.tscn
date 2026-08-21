@@ -187,7 +187,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.17049819, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.05235988, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -199,7 +199,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.17049819, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_hu6bb"]
@@ -524,7 +524,6 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SprintState" type="Node" parent="PlayerStateMachine" unique_id=1776400121]
 script = ExtResource("7_263ev")
-speed = 13.0
 deacceleration = 0.25
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
@@ -745,7 +744,7 @@ disabled = true
 [node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
 script = ExtResource("25_sp8cr")
 bob_frequency = 1.84
-bob_amplitude = 0.04
+bob_amplitude = 0.035
 bob_smoothing = 12.0
 surface_movement_soundfx = Dictionary[String, AudioStream]({
 "concrete": SubResource("AudioStreamRandomizer_lm6dr"),
