@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://xdtc4vshjkld"]
+
+[sub_resource type="Gradient" id="Gradient_ke0tx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8pm3k"]
+seed = 28
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tobig"]
+noise = SubResource("FastNoiseLite_8pm3k")
+color_ramp = SubResource("Gradient_ke0tx")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+bump_strength = 16.0
+
+[resource]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0, 0.20392157, 0.2627451, 0.7294118)
+metallic_specular = 0.56
+roughness = 0.0
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_tobig")

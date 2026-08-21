@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://5f6g41443uak"
+path="res://.godot/imported/NewLand.wav-964f96863cc8168941607442cef8de5d.sample"
+
+[deps]
+
+source_file="res://Assests/soundfx/player mpovement sfx/NewLand.wav"
+dest_files=["res://.godot/imported/NewLand.wav-964f96863cc8168941607442cef8de5d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

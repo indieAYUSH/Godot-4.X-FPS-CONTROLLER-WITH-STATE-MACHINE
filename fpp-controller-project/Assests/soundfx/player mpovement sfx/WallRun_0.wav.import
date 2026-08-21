@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dsbde03aum52c"
+path="res://.godot/imported/WallRun_0.wav-979d5ccbc7eead5da3ac8506a3ca631c.sample"
+
+[deps]
+
+source_file="res://Assests/soundfx/player mpovement sfx/WallRun_0.wav"
+dest_files=["res://.godot/imported/WallRun_0.wav-979d5ccbc7eead5da3ac8506a3ca631c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

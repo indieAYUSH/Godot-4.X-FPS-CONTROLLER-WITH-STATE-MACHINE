@@ -1,0 +1,9 @@
+[gd_resource type="CameraAttributesPractical" format=3 uid="uid://5uo6oashjitj"]
+
+[resource]
+exposure_multiplier = 1.247
+auto_exposure_enabled = true
+auto_exposure_scale = 0.7
+auto_exposure_speed = 1.0
+auto_exposure_min_sensitivity = 165.0
+auto_exposure_max_sensitivity = 1500.0

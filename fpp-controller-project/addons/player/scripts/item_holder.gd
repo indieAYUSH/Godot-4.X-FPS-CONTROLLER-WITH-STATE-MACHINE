@@ -2,9 +2,9 @@ extends Node3D
 class_name item_holder
 
 #Refrences
-@onready var pos_place_holder = $"../../../../../pos_place_holder"
 @onready var camera_3d = %Camera3D
-@onready var pos_place_holder_2 = $"../../../../../pos_place_holder2"
+@onready var pos_place_holder: Node3D = $"../../../../../../pos_place_holder"
+@onready var pos_place_holder_2: Node3D = $"../../../../../../pos_place_holder2"
 
 @export_group("context_menu_vars")
 @export var context_override : bool

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jc8ju8crk3c8"
+path="res://.godot/imported/Wind_Run.wav-e0bd77a03663087e8e2c51f18e948bff.sample"
+
+[deps]
+
+source_file="res://Assests/soundfx/player mpovement sfx/Wind_Run.wav"
+dest_files=["res://.godot/imported/Wind_Run.wav-e0bd77a03663087e8e2c51f18e948bff.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

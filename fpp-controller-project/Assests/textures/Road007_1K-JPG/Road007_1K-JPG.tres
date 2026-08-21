@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b3rtcrfsqj0xt"]
+
+[ext_resource type="Texture2D" uid="uid://c0ndeqa8xqgsa" path="res://Assests/textures/Road007_1K-JPG/Road007_1K-JPG_Color.jpg" id="Color"]
+[ext_resource type="Texture2D" uid="uid://4ejhhytjpvkg" path="res://Assests/textures/Road007_1K-JPG/Road007_1K-JPG_Displacement.jpg" id="Displacement"]
+[ext_resource type="Texture2D" uid="uid://c8uqptck8smnx" path="res://Assests/textures/Road007_1K-JPG/Road007_1K-JPG_NormalGL.jpg" id="NormalGL"]
+[ext_resource type="Texture2D" uid="uid://ceg4b5n3a0lgt" path="res://Assests/textures/Road007_1K-JPG/Road007_1K-JPG_Roughness.jpg" id="Roughness"]
+
+[resource]
+albedo_texture = ExtResource("Color")
+roughness_texture = ExtResource("Roughness")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("NormalGL")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("Displacement")
+uv1_scale = Vector3(0.095, 0.095, 0.095)
+uv1_offset = Vector3(0.55, 0, 0)
+uv1_triplanar = true

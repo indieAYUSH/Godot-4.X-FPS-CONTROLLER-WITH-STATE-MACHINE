@@ -19,12 +19,6 @@ class_name CameraJuiceComponent extends Node3D
 @export var max_speed : float = 9.0
 
 @export_category("Headbob Vars")
-@export_group("yaw and pitch headbob")
-@export var bob_pitch : float = 0.05
-@export var bob_roll : float = 0.025
-@export var bob_up :float = 0.0005
-@export var bob_frequncy : float = 7.0
-@export_group("sinwave x y axis headbob")
 @export var bob_frequency : float
 @export var bob_amplitude : float
 
@@ -47,7 +41,9 @@ var bob_offset_vector : Vector2
 
 @export_category("FOV Vars")
 var target_fov : float
-@export var base_fov :float = 75.0
+@export var base_fov :float = 85.0
+@export var max_fov : float  = 110.0
+@export var player_max_sped : float
 
 var rot_pivot_amount : float = 0.0
 var rot_pivot_x_rot_amount : float = 0.0
@@ -78,27 +74,6 @@ func camera_effects_manager(delta:float) -> void:
 	
 	var speed = Vector2(Player.velocity.x , Player.velocity.z).length()
 	
-	#--======= i prefer x yt axis headbob so i am gonna use that by default
-	#========= u can use onr according to ur neded
-	
-	#_+-----------========== roll yaw headbob===========----------------#
-	
-	#if speed > 0.1 and Player.is_on_floor()  :
-		#_step_timer += delta*(speed/bob_frequncy)
-		#_step_timer = fmod(_step_timer , 1.0)
-	#else:
-		#_step_timer = 0.0
-	#var bob_sin = sin(_step_timer* 2.0 * PI) *0.5
-	#
-	#if Head_bob and _can_headbob():
-		#var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
-		#angles.x -= pitch_delta
-		#
-		#var roll_delta = bob_sin*deg_to_rad(bob_roll) * speed
-		#angles.z -= roll_delta
-		#
-		#var up_delta = bob_sin * speed * bob_up
-		#offsets.y += up_delta
 	
 	#--------=============sin wave x y axis disp  headbob -====================#
 	
@@ -126,8 +101,8 @@ func camera_effects_manager(delta:float) -> void:
 	rot_pivot.rotation.x = clamp(rot_pivot.rotation.x , deg_to_rad(0.0) , deg_to_rad(15.0))
 
 
-func fov_manager(amount:float) -> void:
-	target_fov = base_fov + amount
+func fov_manager(delta:float) -> void:
+	pass
 
 func rot_pivot_manager(amount:float) -> void:
 	rot_pivot_amount = amount

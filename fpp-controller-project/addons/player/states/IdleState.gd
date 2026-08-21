@@ -11,7 +11,7 @@ class_name IdleState extends PlayerMovementState
 
 func _update(delta):
 	if Player.is_on_floor() and Player.velocity.length() > 0.1:
-		change_state.emit("WalkState")
+		change_state.emit("SprintState")
 	
 	if Input.is_action_pressed("crouch") and Player.is_on_floor():
 		change_state.emit("CrouchState")

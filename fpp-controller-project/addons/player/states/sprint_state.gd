@@ -9,9 +9,7 @@ class_name SprintState   extends PlayerMovementState
 
 
 func enter()->void:
-	Player.CameraJuice_Component.fov_manager(fov_change)
-	
-
+	pass
 
 
 func physics_update(delta : float)-> void:
@@ -20,7 +18,7 @@ func physics_update(delta : float)-> void:
 	
 
 func _update(delta : float) -> void:
-	if not Input.is_action_pressed("sprint") or Player.input_dir == Vector2.ZERO:
+	if Input.is_action_pressed("walk"):
 		change_state.emit("WalkState")
 		
 	if Input.is_action_just_pressed("jump") and Player.is_on_floor():
@@ -34,8 +32,9 @@ func _update(delta : float) -> void:
 	
 	if  Input.is_action_just_pressed("Dash") and Player.can_dash :
 		change_state.emit("DashState")
-
+	if Player.velocity.length() < 0.1 :
+		change_state.emit("IdleState")
+		
 func exit()-> void:
-	Player.CameraJuice_Component.fov_manager(-fov_change)
-	
+	pass
 	

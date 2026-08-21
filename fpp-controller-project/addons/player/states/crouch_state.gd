@@ -17,6 +17,7 @@ var lerp_speed : float = 10.0
 
 func enter()->void:
 	Player.crouch()
+	Player.audio_manager.play_crouch_sfx()
 
 
 func _update(delta : float) -> void:
@@ -34,3 +35,4 @@ func physics_update(delta : float)-> void:
 
 func exit()-> void:
 	Player.uncrouch()
+	Player.audio_manager.play_uncrouch_sfx()

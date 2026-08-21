@@ -4,6 +4,8 @@
 
 [resource]
 albedo_texture = ExtResource("1_y2pwv")
+roughness = 0.49
+normal_enabled = true
 uv1_triplanar = true
 uv1_world_triplanar = true
 uv2_triplanar = true

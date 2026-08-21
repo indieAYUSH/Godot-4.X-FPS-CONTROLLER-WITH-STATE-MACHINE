@@ -26,8 +26,41 @@
 [ext_resource type="FontFile" uid="uid://3op67rxtj0f6" path="res://Assests/roboto/Roboto-Black.ttf" id="17_xkm3v"]
 [ext_resource type="Script" uid="uid://do0xiouc1nara" path="res://addons/player/scene/wall_run_state.gd" id="20_d7dwe"]
 [ext_resource type="Script" uid="uid://bswuqjd74cpgu" path="res://addons/player/scripts/audio_manager.gd" id="25_sp8cr"]
-[ext_resource type="AudioStream" uid="uid://de5x0p314lijy" path="res://Assests/soundfx/movementSfx/sfx_step_grass_l.mp3" id="26_r5ose"]
-[ext_resource type="AudioStream" uid="uid://bvv3hnwcmeoeu" path="res://Assests/soundfx/movementSfx/sfx_step_grass_r.mp3" id="27_d7dwe"]
+[ext_resource type="AudioStream" uid="uid://ixk3fsp7wn17" path="res://Assests/soundfx/movementSfx/Step_Rustle_01.wav" id="27_j2dof"]
+[ext_resource type="AudioStream" uid="uid://bcdndam2qto53" path="res://Assests/soundfx/movementSfx/Step_Rustle_02.wav" id="28_3x4x4"]
+[ext_resource type="AudioStream" uid="uid://dixuuhll1b6n0" path="res://Assests/soundfx/movementSfx/Step_Rustle_03.wav" id="29_nylnn"]
+[ext_resource type="AudioStream" uid="uid://4frq0dg4ldpx" path="res://Assests/soundfx/movementSfx/Step_Rustle_04.wav" id="30_lm6dr"]
+[ext_resource type="AudioStream" uid="uid://cr2vwkr6drhl1" path="res://Assests/soundfx/movementSfx/Step_Rustle_05.wav" id="31_3xh5d"]
+[ext_resource type="AudioStream" uid="uid://dhpknma57d1cl" path="res://Assests/soundfx/movementSfx/Step_Water_01.wav" id="32_odckt"]
+[ext_resource type="AudioStream" uid="uid://bnquxfrqkd0g4" path="res://Assests/soundfx/movementSfx/Step_Water_02.wav" id="33_cepdl"]
+[ext_resource type="AudioStream" uid="uid://cdmbphv2vpicd" path="res://Assests/soundfx/movementSfx/Step_Water_03.wav" id="34_hle3a"]
+[ext_resource type="AudioStream" uid="uid://b0brlxouo3n1o" path="res://Assests/soundfx/movementSfx/Step_Metal_01.wav" id="35_qv82k"]
+[ext_resource type="AudioStream" uid="uid://o7l6a8416brf" path="res://Assests/soundfx/movementSfx/Step_Metal_02.wav" id="36_o01dl"]
+[ext_resource type="AudioStream" uid="uid://d2pfbw4er5w65" path="res://Assests/soundfx/movementSfx/Step_Metal_03.mp3" id="37_t0g18"]
+[ext_resource type="AudioStream" uid="uid://bcp831r6ya0d4" path="res://Assests/soundfx/movementSfx/Step_Metal_04.mp3" id="38_do3pi"]
+[ext_resource type="AudioStream" uid="uid://dwc4c14a3rf0r" path="res://Assests/soundfx/movementSfx/Step_Concrete_01.wav" id="39_5ylac"]
+[ext_resource type="AudioStream" uid="uid://dtfqc0yr63his" path="res://Assests/soundfx/movementSfx/Step_Concrete_02.wav" id="40_00njr"]
+[ext_resource type="AudioStream" uid="uid://c2qbdvqwptrxm" path="res://Assests/soundfx/movementSfx/Step_Concrete_03.wav" id="41_mkeow"]
+[ext_resource type="AudioStream" uid="uid://rwamuvrly28x" path="res://Assests/soundfx/movementSfx/Step_Dirt_01.wav" id="42_0kcv4"]
+[ext_resource type="AudioStream" uid="uid://bton5u8oxbfog" path="res://Assests/soundfx/movementSfx/Step_Dirt_02.wav" id="43_q3ycd"]
+[ext_resource type="AudioStream" uid="uid://cnyaosrior26f" path="res://Assests/soundfx/movementSfx/Step_Dirt_03.wav" id="44_h2m1q"]
+[ext_resource type="AudioStream" uid="uid://dcebhu2qeceyp" path="res://Assests/soundfx/movementSfx/Step_Tile_01.wav" id="45_s45jw"]
+[ext_resource type="AudioStream" uid="uid://ch1efjhi5462" path="res://Assests/soundfx/movementSfx/Step_Tile_02.wav" id="46_alowi"]
+[ext_resource type="AudioStream" uid="uid://576405lcxuhf" path="res://Assests/soundfx/movementSfx/Step_Tile_03.wav" id="47_q3onu"]
+[ext_resource type="AudioStream" uid="uid://bgqonl86wdssx" path="res://Assests/soundfx/movementSfx/Step_Tile_04.wav" id="48_2xtsh"]
+[ext_resource type="AudioStream" uid="uid://uihr2wvu6xlg" path="res://Assests/soundfx/movementSfx/Step_Tile_05.wav" id="49_yqo6u"]
+[ext_resource type="AudioStream" uid="uid://jjghgawgmiau" path="res://Assests/soundfx/movementSfx/Step_Tile_06.wav" id="50_3qud2"]
+[ext_resource type="AudioStream" uid="uid://bef3pl805bfq1" path="res://Assests/soundfx/movementSfx/leaves02.ogg" id="51_jthoq"]
+[ext_resource type="AudioStream" uid="uid://5f6g41443uak" path="res://Assests/soundfx/player mpovement sfx/NewLand.wav" id="51_mkeow"]
+[ext_resource type="AudioStream" uid="uid://kc1vckdarflg" path="res://Assests/soundfx/player mpovement sfx/Jump_02.mp3" id="51_t0g18"]
+[ext_resource type="AudioStream" uid="uid://bsklft3fa54ot" path="res://Assests/soundfx/player mpovement sfx/Jump_03.wav" id="52_do3pi"]
+[ext_resource type="AudioStream" uid="uid://chj75rgo3cx3f" path="res://Assests/soundfx/player mpovement sfx/Landing_02.wav" id="53_0kcv4"]
+[ext_resource type="AudioStream" uid="uid://jonwanh20vhn" path="res://Assests/soundfx/player mpovement sfx/Jump_06.wav" id="53_5ylac"]
+[ext_resource type="AudioStream" uid="uid://dgfxf3vlwnhk8" path="res://Assests/soundfx/player mpovement sfx/Jump_05.wav" id="54_00njr"]
+[ext_resource type="AudioStream" uid="uid://0la6kpk8i4sh" path="res://Assests/soundfx/player mpovement sfx/Landing_05.wav" id="54_q3ycd"]
+[ext_resource type="AudioStream" uid="uid://0861e1exqw7h" path="res://Assests/soundfx/player mpovement sfx/Landing_04.wav" id="55_h2m1q"]
+[ext_resource type="AudioStream" uid="uid://cd4sjnq684og1" path="res://Assests/soundfx/player mpovement sfx/Jump_04.wav" id="55_mkeow"]
+[ext_resource type="AudioStream" uid="uid://dldr4oooevpi3" path="res://Assests/soundfx/player mpovement sfx/Sliding_Start.wav" id="61_mkeow"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hu6bb"]
 
@@ -39,7 +72,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/CameraControllerComponent:position")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +84,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/CameraControllerComponent/obstacle_checker/ShapeCast3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/obstacle_checker/ShapeCast3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,7 +96,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
+tracks/2/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -75,7 +108,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
+tracks/3/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -91,7 +124,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/CameraControllerComponent:position")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,7 +136,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/CameraControllerComponent/obstacle_checker/ShapeCast3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/obstacle_checker/ShapeCast3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -119,7 +152,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +164,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -147,7 +180,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -159,7 +192,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -175,7 +208,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/CameraControllerComponent:position")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -191,7 +224,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/CameraControllerComponent:position")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -203,7 +236,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/CameraControllerComponent/obstacle_checker/ShapeCast3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/obstacle_checker/ShapeCast3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -320,87 +353,76 @@ font_size = 20
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qvlqn"]
 height = 1.221582
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4ywcr"]
-streams_count = 2
-stream_0/stream = ExtResource("26_r5ose")
-stream_1/stream = ExtResource("27_d7dwe")
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lm6dr"]
+random_pitch = 1.0072464
+streams_count = 3
+stream_0/stream = ExtResource("39_5ylac")
+stream_1/stream = ExtResource("40_00njr")
+stream_2/stream = ExtResource("41_mkeow")
 
-[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gw4o3"]
+random_pitch = 1.0075374
+streams_count = 5
+stream_0/stream = ExtResource("27_j2dof")
+stream_1/stream = ExtResource("28_3x4x4")
+stream_2/stream = ExtResource("29_nylnn")
+stream_3/stream = ExtResource("30_lm6dr")
+stream_4/stream = ExtResource("31_3xh5d")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3xh5d"]
+streams_count = 3
+stream_0/stream = ExtResource("42_0kcv4")
+stream_1/stream = ExtResource("43_q3ycd")
+stream_2/stream = ExtResource("44_h2m1q")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nylnn"]
+random_pitch = 1.005793
+streams_count = 4
+stream_0/stream = ExtResource("35_qv82k")
+stream_1/stream = ExtResource("36_o01dl")
+stream_2/stream = ExtResource("37_t0g18")
+stream_3/stream = ExtResource("38_do3pi")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1yd5u"]
+random_pitch = 1.0069555
+streams_count = 6
+stream_0/stream = ExtResource("45_s45jw")
+stream_1/stream = ExtResource("46_alowi")
+stream_1/weight = 0.065
+stream_2/stream = ExtResource("47_q3onu")
+stream_2/weight = 0.3
+stream_3/stream = ExtResource("48_2xtsh")
+stream_4/stream = ExtResource("49_yqo6u")
+stream_5/stream = ExtResource("50_3qud2")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3x4x4"]
+random_pitch = 1.005793
+streams_count = 3
+stream_0/stream = ExtResource("32_odckt")
+stream_1/stream = ExtResource("33_cepdl")
+stream_2/stream = ExtResource("34_hle3a")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j2dof"]
+streams_count = 5
+stream_0/stream = ExtResource("51_t0g18")
+stream_1/stream = ExtResource("52_do3pi")
+stream_2/stream = ExtResource("53_5ylac")
+stream_3/stream = ExtResource("54_00njr")
+stream_4/stream = ExtResource("55_mkeow")
+
+[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable", "audio_manager")]
 collision_mask = 3
 script = ExtResource("1_qvlqn")
 player_statemachine = NodePath("PlayerStateMachine")
-CameraJuice_Component = NodePath("head/CameraControllerComponent/CameraJuice")
-itme_holdable = NodePath("head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/item_holder")
+CameraJuice_Component = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice")
+itme_holdable = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/item_holder")
+audio_manager = NodePath("AudioManager")
+air_resistance = 0.15
+wall_jump_retention = 0.7
 
 [node name="head" type="Node3D" parent="." unique_id=194443698]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 0)
-
-[node name="CameraControllerComponent" type="Node3D" parent="head" unique_id=1859547802 node_paths=PackedStringArray("mouse_controller_component", "Player_controller")]
-unique_name_in_owner = true
-script = ExtResource("2_8p4p3")
-mouse_controller_component = NodePath("../../Components/MouseControllerComponent")
-Player_controller = NodePath("../..")
-
-[node name="CameraJuice" type="Node3D" parent="head/CameraControllerComponent" unique_id=878500802 node_paths=PackedStringArray("camera", "Player", "left_collision_checker", "right_collision_checker")]
-script = ExtResource("3_iqofo")
-camera = NodePath("rot_pivot/Camera3D")
-Camera_tilt = true
-Head_bob = true
-camer_fov_changes = true
-Player = NodePath("../../..")
-lerp_speed = 12.0
-bob_pitch = 0.04
-bob_roll = 0.03
-bob_up = 0.003
-bob_frequncy = 5.0
-bob_frequency = 1.7
-bob_amplitude = 0.08
-left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
-right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
-
-[node name="rot_pivot" type="Node3D" parent="head/CameraControllerComponent/CameraJuice" unique_id=589527271]
-unique_name_in_owner = true
-
-[node name="Camera3D" type="Camera3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot" unique_id=1253014890]
-unique_name_in_owner = true
-
-[node name="Interraction_Ray_cast" type="RayCast3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=2048973226]
-target_position = Vector3(0, 0, -3)
-collide_with_areas = true
-
-[node name="item_holder" type="Node3D" parent="head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=998206079]
-script = ExtResource("4_1vt7l")
-context_override = true
-input_prompt_override = "Drop"
-input_icon = ExtResource("5_44c10")
-item_resource = Array[ExtResource("5_t4wwt")]([ExtResource("5_ygc1f")])
-
-[node name="obstacle_checker" type="Node3D" parent="head/CameraControllerComponent" unique_id=646212523]
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker" unique_id=1691650619]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0815711, 0)
-shape = SubResource("SphereShape3D_hu6bb")
-target_position = Vector3(0, 0, 0)
-debug_shape_custom_color = Color(0, 1, 0, 1)
-
-[node name="LnRcollision" type="Node3D" parent="head/CameraControllerComponent/obstacle_checker" unique_id=139052779]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3096509, 0)
-
-[node name="Lobschecker" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker/LnRcollision" unique_id=1029935765]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64993507, -0.155, 0)
-shape = SubResource("SphereShape3D_1wljh")
-target_position = Vector3(0, 0, 0)
-debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
-
-[node name="RObscheckr" type="ShapeCast3D" parent="head/CameraControllerComponent/obstacle_checker/LnRcollision" unique_id=1894245337]
-unique_name_in_owner = true
-transform = Transform3D(0.99990255, 0, 0.01396218, 0, 1, 0, -0.01396218, 0, 0.99990255, 0.6903192, -0.155, 0)
-shape = SubResource("SphereShape3D_1wljh")
-target_position = Vector3(0, 0, 0)
-debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
 
 [node name="pos_place_holder" type="Node3D" parent="head" unique_id=2106155273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.6431665)
@@ -408,16 +430,82 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.6431665)
 [node name="pos_place_holder2" type="Node3D" parent="head" unique_id=956108316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55368423)
 
+[node name="FreeLookPivot" type="Node3D" parent="head" unique_id=49716542]
+unique_name_in_owner = true
+
+[node name="CameraControllerComponent" type="Node3D" parent="head/FreeLookPivot" unique_id=1859547802 node_paths=PackedStringArray("mouse_controller_component", "Player_controller")]
+unique_name_in_owner = true
+script = ExtResource("2_8p4p3")
+mouse_controller_component = NodePath("../../../Components/MouseControllerComponent")
+Player_controller = NodePath("../../..")
+
+[node name="CameraJuice" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent" unique_id=878500802 node_paths=PackedStringArray("camera", "Player", "left_collision_checker", "right_collision_checker")]
+script = ExtResource("3_iqofo")
+camera = NodePath("rot_pivot/Camera3D")
+Camera_tilt = true
+Head_bob = true
+camer_fov_changes = true
+Player = NodePath("../../../..")
+lerp_speed = 12.0
+bob_frequency = 1.65
+bob_amplitude = 0.035
+left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
+right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
+
+[node name="rot_pivot" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice" unique_id=589527271]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot" unique_id=1253014890]
+unique_name_in_owner = true
+fov = 85.0
+
+[node name="Interraction_Ray_cast" type="RayCast3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=2048973226]
+target_position = Vector3(0, 0, -3)
+collide_with_areas = true
+
+[node name="item_holder" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=998206079]
+script = ExtResource("4_1vt7l")
+context_override = true
+input_prompt_override = "Drop"
+input_icon = ExtResource("5_44c10")
+item_resource = Array[ExtResource("5_t4wwt")]([ExtResource("5_ygc1f")])
+
+[node name="obstacle_checker" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent" unique_id=646212523]
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="head/FreeLookPivot/CameraControllerComponent/obstacle_checker" unique_id=1691650619]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0815711, 0)
+shape = SubResource("SphereShape3D_hu6bb")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
+[node name="LnRcollision" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/obstacle_checker" unique_id=139052779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3096509, 0)
+
+[node name="Lobschecker" type="ShapeCast3D" parent="head/FreeLookPivot/CameraControllerComponent/obstacle_checker/LnRcollision" unique_id=1029935765]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64993507, -0.155, 0)
+shape = SubResource("SphereShape3D_1wljh")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
+
+[node name="RObscheckr" type="ShapeCast3D" parent="head/FreeLookPivot/CameraControllerComponent/obstacle_checker/LnRcollision" unique_id=1894245337]
+unique_name_in_owner = true
+transform = Transform3D(0.99990255, 0, 0.01396218, 0, 1, 0, -0.01396218, 0, 0.99990255, 0.6903192, -0.155, 0)
+shape = SubResource("SphereShape3D_1wljh")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
+
 [node name="Components" type="Node" parent="." unique_id=1451967956]
 
 [node name="MouseControllerComponent" type="Node" parent="Components" unique_id=1245595419 node_paths=PackedStringArray("camera_controller")]
 script = ExtResource("3_4eyqk")
 mouse_senstivity = 0.003
-camera_controller = NodePath("../../head/CameraControllerComponent")
+camera_controller = NodePath("../../head/FreeLookPivot/CameraControllerComponent")
 
 [node name="PlayerInterractionRay" type="Node" parent="Components" unique_id=1938175511 node_paths=PackedStringArray("interaction_raycast")]
 script = ExtResource("5_vd5ca")
-interaction_raycast = NodePath("../../head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/Interraction_Ray_cast")
+interaction_raycast = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/Interraction_Ray_cast")
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=338015821 node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_gp3q6")
@@ -431,21 +519,22 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 [node name="WalkState" type="Node" parent="PlayerStateMachine" unique_id=219710861]
 script = ExtResource("6_tblmv")
 speed = 8.5
+deacceleration = 0.25
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SprintState" type="Node" parent="PlayerStateMachine" unique_id=1776400121]
 script = ExtResource("7_263ev")
 speed = 13.0
+deacceleration = 0.25
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="CrouchState" type="Node" parent="PlayerStateMachine" unique_id=470314354 node_paths=PackedStringArray("CameraController")]
 script = ExtResource("8_blwvw")
-CameraController = NodePath("../../head/CameraControllerComponent")
+CameraController = NodePath("../../head/FreeLookPivot/CameraControllerComponent")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="JumpState" type="Node" parent="PlayerStateMachine" unique_id=486693409]
 script = ExtResource("9_hu6bb")
-speed = 7.0
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SlideState" type="Node" parent="PlayerStateMachine" unique_id=2100855296]
@@ -454,11 +543,13 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="FallingState" type="Node" parent="PlayerStateMachine" unique_id=1690328108]
 script = ExtResource("13_xsu4s")
+wall_push_force = 5.0
+wall_jump_retention = 0.65
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="DashState" type="Node" parent="PlayerStateMachine" unique_id=677291627 node_paths=PackedStringArray("camera", "DashCoolDownTimer")]
 script = ExtResource("14_w2vqi")
-camera = NodePath("../../head/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D")
+camera = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D")
 DashCoolDownTimer = NodePath("../../TimersHolderComponent/DashCoolDown")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
@@ -468,6 +559,7 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="WallRunState" type="Node" parent="PlayerStateMachine" unique_id=1075575694]
 script = ExtResource("20_d7dwe")
+gravity_multiplier = 0.15
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="Debug_ui" type="CanvasLayer" parent="." unique_id=1470571746 node_paths=PackedStringArray("PLayer")]
@@ -520,9 +612,20 @@ layout_mode = 2
 
 [node name="speed" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container" unique_id=514172513]
 layout_mode = 2
-text = "SPEED:"
+text = "velocity:"
 
 [node name="speed_data" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container" unique_id=1178550582]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Player_speed_container2" type="HBoxContainer" parent="Debug_ui/Control/Panel/VBoxContainer" unique_id=2027821199]
+layout_mode = 2
+
+[node name="speed" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container2" unique_id=1014152013]
+layout_mode = 2
+text = "totalv:"
+
+[node name="speed_data_total" type="Label" parent="Debug_ui/Control/Panel/VBoxContainer/Player_speed_container2" unique_id=983160070]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -641,9 +744,29 @@ disabled = true
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
 script = ExtResource("25_sp8cr")
-bob_frequency = 1.8399999999999999
-bob_amplitude = 0.09
+bob_frequency = 1.84
+bob_amplitude = 0.04
 bob_smoothing = 12.0
+surface_movement_soundfx = Dictionary[String, AudioStream]({
+"concrete": SubResource("AudioStreamRandomizer_lm6dr"),
+"default": SubResource("AudioStreamRandomizer_gw4o3"),
+"dirt": SubResource("AudioStreamRandomizer_3xh5d"),
+"metal": SubResource("AudioStreamRandomizer_nylnn"),
+"tile": SubResource("AudioStreamRandomizer_1yd5u"),
+"water": SubResource("AudioStreamRandomizer_3x4x4")
+})
+land_audio_container = Dictionary[String, AudioStream]({
+"concrete": ExtResource("53_0kcv4"),
+"default": ExtResource("51_mkeow"),
+"dirt": ExtResource("55_h2m1q"),
+"metal": ExtResource("54_q3ycd"),
+"tile": ExtResource("49_yqo6u"),
+"water": ExtResource("33_cepdl")
+})
+jump_audio = SubResource("AudioStreamRandomizer_j2dof")
+crouch_audio = ExtResource("51_jthoq")
+uncrouch_audio = ExtResource("51_jthoq")
+slide_audio = ExtResource("61_mkeow")
 movement_audio_player = NodePath("walk")
 crouch_audio_player = NodePath("crouch")
 uncrouch_audio_player = NodePath("uncrouch")
@@ -658,7 +781,6 @@ surface_checker_cast = NodePath("surface_cast")
 [node name="uncrouch" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1141294854]
 
 [node name="walk" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=960559123]
-stream = SubResource("AudioStreamRandomizer_4ywcr")
 
 [node name="jump" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1805015295]
 
@@ -666,7 +788,11 @@ stream = SubResource("AudioStreamRandomizer_4ywcr")
 
 [node name="slide" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=256370045]
 
+[node name="slideloop" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1364163888]
+
 [node name="surface_cast" type="RayCast3D" parent="AudioManager" unique_id=1304080068 groups=["sdio_player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.357393, 0.014934719)
+collide_with_areas = true
 
 [connection signal="state_changed" from="PlayerStateMachine" to="Debug_ui" method="_on_player_state_machine_state_changed"]
 [connection signal="timeout" from="TimersHolderComponent/DashCoolDown" to="PlayerStateMachine/DashState" method="_on_dash_cool_down_timeout"]

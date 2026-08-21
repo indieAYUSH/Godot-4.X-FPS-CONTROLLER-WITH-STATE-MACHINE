@@ -7,29 +7,53 @@ extends PlayerMovementState
 @export var deacceleration : float  = 0.3
 @export var input_multiplier : float = 0.5
 @export var gravity_multiplier : float = 1.0
+
+@export_group("control vars")
+@export var InputMultiplier : float = 0.85
+
 @export_category("Camera effects var")
 @export var max_camera_rotation : float = 10.0
 @export var jump_force : float = 4.5
-@export var wall_push_force : float = 10.0
 
+@export_category("Wall jumps")
+@export var wall_push_force : float = 13.0
+@export var max_wall_jump : float = 2.0
+@export var wall_jump_retention : float = 1.0
+
+
+var wall_jump_left : float = 2.0
+var wall_jump : bool = false
+var current_speed : float
+var wall_jump_control_lock : float = 0.0
+var player_air_mov_direction
 
 func physics_update(delta : float)-> void:
 	Player.update_gravity(delta , gravity_multiplier)
-	Player.update_movement(speed * input_multiplier , acceleration , deacceleration)
 	
 	if  Input.is_action_just_pressed("Dash") and Player.can_dash :
 		change_state.emit("DashState")
 	
-	if Player.is_on_wall() and Input.is_action_just_pressed("jump"):
-		
-		if Player.get_last_slide_collision() == null:
+	if Input.is_action_just_pressed("jump"):
+		if Player.is_on_wall() and wall_jump_left > 0.0:
+			
+			if Player.get_last_slide_collision() == null:
+				return
+			var wall_normal = Player.get_last_slide_collision().get_normal()
+			
+			if wall_normal.y > abs(0.25): 
+				return
+			wall_jump = true
+			wall_jump_control_lock = 1.2
+			Player.wall_jump(wall_normal , wall_jump_retention , jump_force , wall_push_force)
+			wall_jump_left -= 1
 			return
-		
-		var wall_normal = Player.get_last_slide_collision().get_normal()
-		Player.velocity = wall_push_force*wall_normal
-		Player.velocity.y = jump_force
-		print(Player.velocity)
-
+	
+	Player.apply_air_resistance(delta)
+	if wall_jump_control_lock > 0.0:
+		wall_jump_control_lock -= delta
+	else:
+		Player.update_air_movement(player_air_mov_direction ,delta , InputMultiplier , acceleration)
+	
 func _update(delta : float) -> void:
 	var max_speed : float = 11.0
 	var vertical_speed = abs(Player.velocity.y)
@@ -41,6 +65,11 @@ func _update(delta : float) -> void:
 	if Player.is_on_floor():
 		change_state.emit("IdleState")
 		PlayerAnimation.play("land")
+		Player.audio_manager.play_land_sfx()
 
 func exit()-> void:
+	wall_jump_control_lock = 0.5
 	Player.CameraJuice_Component.rot_pivot_x_rot_amount = 0.0
+
+func enter()->void:
+	player_air_mov_direction = Player.transform.basis

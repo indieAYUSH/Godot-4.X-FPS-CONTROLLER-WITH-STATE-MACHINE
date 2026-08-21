@@ -7,10 +7,9 @@ class_name WalkState extends PlayerMovementState
 @export var gravity_multiplier : float = 1.0
 
 func _update(delta:float):
-	if Player.velocity.length() < 0.01 :
-		change_state.emit("IdleState")
 	
-	if Input.is_action_pressed("sprint") and Player.is_on_floor() and Input.get_axis("baackward" , "forward") > 0.1:
+	
+	if !Input.is_action_pressed("walk"):
 		change_state.emit("SprintState")
 	
 	if Input.is_action_pressed("crouch") :
