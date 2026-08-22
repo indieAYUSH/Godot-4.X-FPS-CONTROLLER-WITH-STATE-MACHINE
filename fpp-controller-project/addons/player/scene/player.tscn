@@ -61,6 +61,7 @@
 [ext_resource type="AudioStream" uid="uid://0861e1exqw7h" path="res://Assests/soundfx/player mpovement sfx/Landing_04.wav" id="55_h2m1q"]
 [ext_resource type="AudioStream" uid="uid://cd4sjnq684og1" path="res://Assests/soundfx/player mpovement sfx/Jump_04.wav" id="55_mkeow"]
 [ext_resource type="AudioStream" uid="uid://dldr4oooevpi3" path="res://Assests/soundfx/player mpovement sfx/Sliding_Start.wav" id="61_mkeow"]
+[ext_resource type="Script" uid="uid://cwqddn35jjrqm" path="res://addons/player/UI/motion_visual_effect_manager.gd" id="62_0kcv4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hu6bb"]
 
@@ -96,7 +97,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
+tracks/2/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -108,7 +109,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
+tracks/3/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -152,7 +153,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -164,7 +165,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -180,7 +181,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:rotation")
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -192,7 +193,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D:position")
+tracks/1/path = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -415,10 +416,12 @@ collision_mask = 3
 script = ExtResource("1_qvlqn")
 player_statemachine = NodePath("PlayerStateMachine")
 CameraJuice_Component = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice")
-itme_holdable = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/item_holder")
+itme_holdable = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D/item_holder")
 audio_manager = NodePath("AudioManager")
-air_resistance = 0.15
-wall_jump_retention = 0.7
+air_resistance = 0.2
+wall_push_force = 7.0
+wall_jump_retention = 0.8
+wall_run_velocity_threshold = 8.0
 
 [node name="head" type="Node3D" parent="." unique_id=194443698]
 unique_name_in_owner = true
@@ -441,7 +444,7 @@ Player_controller = NodePath("../../..")
 
 [node name="CameraJuice" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent" unique_id=878500802 node_paths=PackedStringArray("camera", "Player", "left_collision_checker", "right_collision_checker")]
 script = ExtResource("3_iqofo")
-camera = NodePath("rot_pivot/Camera3D")
+camera = NodePath("bob_head/rot_pivot/Camera3D")
 Camera_tilt = true
 Head_bob = true
 camer_fov_changes = true
@@ -451,19 +454,23 @@ bob_frequency = 1.65
 bob_amplitude = 0.035
 left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
 right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
+player_max_sped = 17.0
 
-[node name="rot_pivot" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice" unique_id=589527271]
+[node name="bob_head" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice" unique_id=1760065247]
 unique_name_in_owner = true
 
-[node name="Camera3D" type="Camera3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot" unique_id=1253014890]
+[node name="rot_pivot" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head" unique_id=589527271]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot" unique_id=1253014890]
 unique_name_in_owner = true
 fov = 85.0
 
-[node name="Interraction_Ray_cast" type="RayCast3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=2048973226]
+[node name="Interraction_Ray_cast" type="RayCast3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D" unique_id=2048973226]
 target_position = Vector3(0, 0, -3)
 collide_with_areas = true
 
-[node name="item_holder" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D" unique_id=998206079]
+[node name="item_holder" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D" unique_id=998206079]
 script = ExtResource("4_1vt7l")
 context_override = true
 input_prompt_override = "Drop"
@@ -505,7 +512,7 @@ camera_controller = NodePath("../../head/FreeLookPivot/CameraControllerComponent
 
 [node name="PlayerInterractionRay" type="Node" parent="Components" unique_id=1938175511 node_paths=PackedStringArray("interaction_raycast")]
 script = ExtResource("5_vd5ca")
-interaction_raycast = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D/Interraction_Ray_cast")
+interaction_raycast = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D/Interraction_Ray_cast")
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=338015821 node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_gp3q6")
@@ -524,6 +531,7 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SprintState" type="Node" parent="PlayerStateMachine" unique_id=1776400121]
 script = ExtResource("7_263ev")
+speed = 13.0
 deacceleration = 0.25
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
@@ -542,13 +550,11 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="FallingState" type="Node" parent="PlayerStateMachine" unique_id=1690328108]
 script = ExtResource("13_xsu4s")
-wall_push_force = 5.0
-wall_jump_retention = 0.65
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="DashState" type="Node" parent="PlayerStateMachine" unique_id=677291627 node_paths=PackedStringArray("camera", "DashCoolDownTimer")]
 script = ExtResource("14_w2vqi")
-camera = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/rot_pivot/Camera3D")
+camera = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D")
 DashCoolDownTimer = NodePath("../../TimersHolderComponent/DashCoolDown")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
@@ -558,7 +564,8 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="WallRunState" type="Node" parent="PlayerStateMachine" unique_id=1075575694]
 script = ExtResource("20_d7dwe")
-gravity_multiplier = 0.15
+speed = 14.0
+gravity_multiplier = 0.06
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="Debug_ui" type="CanvasLayer" parent="." unique_id=1470571746 node_paths=PackedStringArray("PLayer")]
@@ -744,7 +751,7 @@ disabled = true
 [node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
 script = ExtResource("25_sp8cr")
 bob_frequency = 1.84
-bob_amplitude = 0.035
+bob_amplitude = 0.033
 bob_smoothing = 12.0
 surface_movement_soundfx = Dictionary[String, AudioStream]({
 "concrete": SubResource("AudioStreamRandomizer_lm6dr"),
@@ -789,9 +796,17 @@ surface_checker_cast = NodePath("surface_cast")
 
 [node name="slideloop" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=1364163888]
 
-[node name="surface_cast" type="RayCast3D" parent="AudioManager" unique_id=1304080068 groups=["sdio_player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.357393, 0.014934719)
+[node name="surface_cast" type="RayCast3D" parent="AudioManager" unique_id=2131275430 groups=["sdio_player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70069623, 0.014934719)
+target_position = Vector3(0, -0.7, 0)
 collide_with_areas = true
+
+[node name="MotionVisualEffectManager" type="Control" parent="." unique_id=1850737590]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("62_0kcv4")
 
 [connection signal="state_changed" from="PlayerStateMachine" to="Debug_ui" method="_on_player_state_machine_state_changed"]
 [connection signal="timeout" from="TimersHolderComponent/DashCoolDown" to="PlayerStateMachine/DashState" method="_on_dash_cool_down_timeout"]

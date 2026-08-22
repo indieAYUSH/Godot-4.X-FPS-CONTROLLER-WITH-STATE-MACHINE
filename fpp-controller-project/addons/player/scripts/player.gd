@@ -73,6 +73,7 @@ func _update_rotation(rot_value : Vector3) -> void :
 	transform.basis = Basis.from_euler(rot_value)
 
 
+
 #func input_direction()->void:
 	#input_dir
 
@@ -80,7 +81,6 @@ func _update_rotation(rot_value : Vector3) -> void :
 
 func update_movement(_speed : float , _acceleration : float , Deacceleration :float ):
 	input_dir = Input.get_vector("left", "right", "forward", "baackward")
-	var horizontal_velocity : Vector3 = Vector3(velocity.x , 0.0 , velocity.y)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
@@ -124,10 +124,15 @@ func update_air_movement(dir , delta:float , input_multiplier : float , air_cont
 
 func wall_jump(wall_normal : Vector3 , jump_force : float , _wall_jump_retention , _wall_push_force : float):
 	var horizontal_movement : Vector3  = Vector3(velocity.x , 0.0 , velocity.z)
-	var horizonal_movement_vector = horizontal_movement.normalized()+wall_normal
-
-	var target_speed = _wall_push_force+abs(horizontal_movement.length()*_wall_jump_retention)
-	var target_velocity = horizonal_movement_vector*target_speed
+	##var horizonal_movement_vector = horizontal_movement.normalized()+wall_normal
+	##
+	##var target_speed = _wall_push_force+abs(horizontal_movement.length()*_wall_jump_retention)
+	#
+	#var horizonal_movement_vector = horizontal_movement.normalized()+wall_normal
+#
+	#var target_speed = _wall_push_force+abs(horizontal_movement.length()*_wall_jump_retention)
+	
+	var target_velocity = (horizontal_movement*_wall_jump_retention) + (wall_normal*wall_push_force)
 	
 	velocity.x = target_velocity.x
 	velocity.z = target_velocity.z
@@ -144,8 +149,10 @@ func update_slide_movement(dir , _speed : float , _acceleration : float , Deacce
 		velocity.z = move_toward(velocity.z, 0,  Deacceleration)
 
 
-func wall_run(_direction : Vector3 , _speed : float ) -> void:
-	velocity = _direction * _speed
+func wall_run(_direction : Vector3 , _speed : float , _acceleration : float ) -> void:
+	var wall_run_direction := velocity.slide(_direction)
+	velocity.x = lerp(velocity.x ,(wall_run_direction.normalized()).x*_speed , _acceleration )
+	velocity.z =lerp(velocity.z ,(wall_run_direction.normalized()).z*_speed , _acceleration )
 
 func update_gravity(delta , _gravity_multiplier : float):
 	if not is_on_floor():
@@ -173,3 +180,15 @@ func dash(direction: Vector3, speed: float) -> void:
 
 func freeze_player() ->void:
 	player_statemachine.on_change_state("FreezeState")
+
+
+func valid_wall_run()->bool:
+	if is_on_wall() and velocity.y < 1.0 and Input.is_action_pressed("forward") and velocity.length()>wall_run_velocity_threshold:
+		for i in get_slide_collision_count():
+			var collision_surface = get_slide_collision(i)
+			var collision_normal = collision_surface.get_normal()
+			var dir_dot = -current_movement_direction.dot(collision_normal)
+			if abs(dir_dot) > 0.05 and abs(dir_dot) < 0.85:
+				print(dir_dot)
+				return true 
+	return false

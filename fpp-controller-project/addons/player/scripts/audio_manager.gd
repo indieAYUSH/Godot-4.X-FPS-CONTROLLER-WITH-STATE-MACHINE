@@ -7,7 +7,8 @@ class_name AudioManager extends Node3D
 @export var bob_frequency : float
 @export var bob_amplitude : float
 @export var bob_smoothing : float
-@export var max_speed : float = 17.0
+@export var min_speed : float = 6.0
+@export var max_speed : float = 16.0
 
 @export_group("ground _ movement")
 @export var max_pitch : float = 1.4
@@ -84,26 +85,29 @@ func _ready() -> void:
 	slide_audio_player.stream = slide_audio
 
 func _physics_process(delta: float) -> void:
+	var surface_collider
 	if surface_checker_cast.is_colliding():
-		var surface_collider = surface_checker_cast.get_collider()
-		if !surface_collider: 
-			return
-		var surface_group = surface_collider.get_groups()
-		
-		if surface_group.is_empty():
-			return
-		
-		var surface_name = surface_group[0]
-		if current_surface_name != surface_name:
-			current_surface_name = surface_name
-			var movement_audio = surface_movement_soundfx.get(current_surface_name)
-			if movement_audio:
-				current_movement_audio = surface_movement_soundfx[current_surface_name]
-				movement_audio_player.stream = current_movement_audio
-			var land_audio = land_audio_container.get(current_surface_name)
-			if land_audio:
-				current_landing_audio = land_audio_container[current_surface_name]
-				land_audio_player.stream = current_landing_audio
+		surface_collider = surface_checker_cast.get_collider()
+	elif player_controller.is_on_wall():
+		surface_collider = player_controller.get_last_slide_collision().get_collider()
+	if !surface_collider: 
+		return
+	var surface_group = surface_collider.get_groups()
+	
+	if surface_group.is_empty():
+		return
+	
+	var surface_name = surface_group[0]
+	if current_surface_name != surface_name:
+		current_surface_name = surface_name
+		var movement_audio = surface_movement_soundfx.get(current_surface_name)
+		if movement_audio:
+			current_movement_audio = surface_movement_soundfx[current_surface_name]
+			movement_audio_player.stream = current_movement_audio
+		var land_audio = land_audio_container.get(current_surface_name)
+		if land_audio:
+			current_landing_audio = land_audio_container[current_surface_name]
+			land_audio_player.stream = current_landing_audio
 
 #Wwwd
 func _process(delta: float) -> void:
@@ -171,3 +175,6 @@ func dynamic_pitch_volume(delta : float) ->void:
 		land_audio_player.pitch_scale = air_max_pitch
 	else:
 		land_audio_player.pitch_scale = air_min_pitch
+		
+	
+	movement_audio_player.pitch_scale = clamp(remap(current_speed , min_speed , max_speed , 0.85 , 1.2 ) , 0.85 , 1.2)

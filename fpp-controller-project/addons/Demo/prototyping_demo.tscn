@@ -252,25 +252,25 @@ use_collision = true
 size = Vector3(100, 4, 1)
 material = ExtResource("2_w16u2")
 
-[node name="boundaryWall5" type="CSGBox3D" parent="walls" unique_id=266527373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.865227, 2, 42.448277)
+[node name="boundaryWall5" type="CSGBox3D" parent="walls" unique_id=266527373 groups=["metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.850601, 2.7954488, 42.448277)
 use_collision = true
 size = Vector3(12.317551, 4, 1)
 material = ExtResource("2_w16u2")
 
-[node name="boundaryWall6" type="CSGBox3D" parent="walls" unique_id=1722329596]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.849334, 2, 36.662792)
+[node name="boundaryWall6" type="CSGBox3D" parent="walls" unique_id=1722329596 groups=["metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.039967, 2, 36.662792)
 use_collision = true
-size = Vector3(12.317551, 4, 1)
+size = Vector3(20.698814, 4, 1)
 material = ExtResource("2_w16u2")
 
-[node name="boundaryWall7" type="CSGBox3D" parent="walls" unique_id=1144710593]
+[node name="boundaryWall7" type="CSGBox3D" parent="walls" unique_id=1144710593 groups=["metal"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4150753, 2, 42.071274)
 use_collision = true
 size = Vector3(45.836388, 4, 1)
 material = ExtResource("2_w16u2")
 
-[node name="boundaryWall8" type="CSGBox3D" parent="walls" unique_id=2043400181]
+[node name="boundaryWall8" type="CSGBox3D" parent="walls" unique_id=2043400181 groups=["metal"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7948103, 2, 37.054382)
 use_collision = true
 size = Vector3(22.175833, 4, 1)
