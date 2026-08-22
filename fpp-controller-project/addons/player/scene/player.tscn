@@ -62,6 +62,8 @@
 [ext_resource type="AudioStream" uid="uid://cd4sjnq684og1" path="res://Assests/soundfx/player mpovement sfx/Jump_04.wav" id="55_mkeow"]
 [ext_resource type="AudioStream" uid="uid://dldr4oooevpi3" path="res://Assests/soundfx/player mpovement sfx/Sliding_Start.wav" id="61_mkeow"]
 [ext_resource type="Script" uid="uid://cwqddn35jjrqm" path="res://addons/player/UI/motion_visual_effect_manager.gd" id="62_0kcv4"]
+[ext_resource type="Material" uid="uid://rvs7pir2ke6d" path="res://addons/shaders/new_shader_material.tres" id="63_q3ycd"]
+[ext_resource type="Shader" uid="uid://dkou2pmsjvbi1" path="res://addons/shaders/radial_blur.gdshader" id="64_h2m1q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hu6bb"]
 
@@ -410,6 +412,12 @@ stream_1/stream = ExtResource("52_do3pi")
 stream_2/stream = ExtResource("53_5ylac")
 stream_3/stream = ExtResource("54_00njr")
 stream_4/stream = ExtResource("55_mkeow")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wljh"]
+shader = ExtResource("64_h2m1q")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/blur_power = 0.01
+shader_parameter/sampling_count = 6
 
 [node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable", "audio_manager")]
 collision_mask = 3
@@ -801,12 +809,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70069623, 0.014934719)
 target_position = Vector3(0, -0.7, 0)
 collide_with_areas = true
 
-[node name="MotionVisualEffectManager" type="Control" parent="." unique_id=1850737590]
+[node name="MotionVisualEffectManager" type="Control" parent="." unique_id=1850737590 node_paths=PackedStringArray("vg_rect", "rblur_rect")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("62_0kcv4")
+vg_rect = NodePath("vignete")
+rblur_rect = NodePath("radial_blur")
+
+[node name="vignete" type="ColorRect" parent="MotionVisualEffectManager" unique_id=257867219]
+material = ExtResource("63_q3ycd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="radial_blur" type="ColorRect" parent="MotionVisualEffectManager" unique_id=1161801127]
+z_index = -1
+material = SubResource("ShaderMaterial_1wljh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="state_changed" from="PlayerStateMachine" to="Debug_ui" method="_on_player_state_machine_state_changed"]
 [connection signal="timeout" from="TimersHolderComponent/DashCoolDown" to="PlayerStateMachine/DashState" method="_on_dash_cool_down_timeout"]

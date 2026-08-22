@@ -58,7 +58,7 @@ func physics_update(delta : float)-> void:
 	
 	
 	if Input.is_action_just_pressed("jump"):
-		Player.wall_jump(wall_normal , 3.0  , Player.wall_jump_retention*1.2 , Player.wall_push_force*1.4)
+		Player.wall_jump(wall_normal , 3.0  , 1.0 , Player.wall_push_force*1.6)
 		change_state.emit("FallingState")
 	
 	

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://rvs7pir2ke6d"]
+
+[ext_resource type="Shader" uid="uid://cif5ntkreo08" path="res://addons/shaders/vg.gdshader" id="1_mdo8w"]
+
+[resource]
+shader = ExtResource("1_mdo8w")
+shader_parameter/vignette_intensity = 0.7
+shader_parameter/vignette_opacity = 0.800000038
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
