@@ -2,8 +2,8 @@ class_name WalkState extends PlayerMovementState
 
 @export_category("Movement vars")
 @export var speed : float = 7.5
-@export var acceleration : float = 0.15
-@export var deacceleration : float  = 0.3
+@export var acceleration : float = 10.0
+@export var deacceleration : float  = 20.0
 @export var gravity_multiplier : float = 1.0
 
 func _update(delta:float):
@@ -26,5 +26,8 @@ func _update(delta:float):
 
 
 func physics_update(delta : float)-> void:
-	Player.update_movement(speed , acceleration , deacceleration)
+	Player.update_movement(speed ,  delta)
 	Player.update_gravity(delta , gravity_multiplier)
+
+func enter()->void:
+	Player.ground_accel = speed*10

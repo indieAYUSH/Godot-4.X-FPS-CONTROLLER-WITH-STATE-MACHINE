@@ -28,6 +28,7 @@ func physics_update(delta : float)-> void:
 	
 	if  Input.is_action_just_pressed("Dash") and Player.can_dash :
 		change_state.emit("DashState")
+		return
 	
 	
 	if Player.is_on_wall()  and Input.is_action_just_pressed("jump") and wall_jump_left > 0.0:
@@ -38,8 +39,8 @@ func physics_update(delta : float)-> void:
 		if wall_normal.y > abs(0.25): 
 			return
 		wall_jump = true
-		wall_jump_control_lock = 1.5
-		Player.wall_jump(wall_normal , Player.wall_jump_retention , jump_force , Player.wall_push_force)
+		#wall_jump_control_lock = 1.5
+		Player.wall_jump(wall_normal , jump_force , Player.wall_jump_retention , Player.wall_push_force)
 		wall_jump_left -= 1
 		return
 	
@@ -47,11 +48,10 @@ func physics_update(delta : float)-> void:
 		change_state.emit("WallRunState")
 		return
 	
-	Player.apply_air_resistance(delta)
-	if wall_jump_control_lock > 0.0:
-		wall_jump_control_lock -= delta
-	else:
-		Player.update_air_movement(player_air_mov_direction ,delta , InputMultiplier , acceleration)
+	#if wall_jump_control_lock > 0.0:
+		#wall_jump_control_lock -= delta
+	#else:
+	Player.update_air_movement(player_air_mov_direction ,delta , InputMultiplier , acceleration)
 	
 func _update(delta : float) -> void:
 	var max_speed : float = 11.0
@@ -60,11 +60,17 @@ func _update(delta : float) -> void:
 	speed_delta = clamp(speed_delta , 0.0 , 1.0)
 	var rotation_delta = max_camera_rotation * speed_delta
 	Player.CameraJuice_Component.rot_pivot_x_rot_amount = rotation_delta
-
+	
+	if Player.is_on_floor()  and Input.is_action_pressed("crouch") and Player.current_horizontal_velocity.length() > Player.slide_threshold_speed and Player.velocity.y <= 0.01 and Input.get_vector("left", "right", "forward", "baackward").length() > 0:
+		change_state.emit("SlideState")
+		return
+	
+	
 	if Player.is_on_floor():
 		change_state.emit("IdleState")
 		PlayerAnimation.play("land")
 		Player.audio_manager.play_land_sfx()
+		return
 
 func exit()-> void:
 	wall_jump_control_lock = 1.5

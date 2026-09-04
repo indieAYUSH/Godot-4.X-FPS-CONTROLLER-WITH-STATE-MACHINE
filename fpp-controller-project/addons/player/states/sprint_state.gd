@@ -2,19 +2,19 @@ class_name SprintState   extends PlayerMovementState
 
 @export_category("Movement vars")
 @export var speed : float = 11.0
-@export var acceleration : float = 0.15
-@export var deacceleration : float  = 0.3
+@export var acceleration : float = 10.0
+@export var deacceleration : float  = 20.0
 @export var fov_change : float = 8.0
 @export var gravity_multiplier : float = 1.0
 
 
 func enter()->void:
-	pass
+	Player.ground_accel = speed*10
 
 
 func physics_update(delta : float)-> void:
 	Player.update_gravity(delta , gravity_multiplier)
-	Player.update_movement(speed , acceleration , deacceleration)
+	Player.update_movement(speed ,  delta)
 	
 
 func _update(delta : float) -> void:

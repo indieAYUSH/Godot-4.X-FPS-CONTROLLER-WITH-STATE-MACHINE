@@ -2,8 +2,8 @@ class_name  CrouchState  extends PlayerMovementState
 
 @export_category("Movement vars")
 @export var speed : float = 4.5
-@export var acceleration : float = 0.15
-@export var deacceleration : float  = 0.3
+@export var acceleration : float = 10.0
+@export var deacceleration : float  = 20.0
 
 @export var toggle_crouch : bool
 @export var gravity_multiplier : float = 1.0
@@ -18,7 +18,7 @@ var lerp_speed : float = 10.0
 func enter()->void:
 	Player.crouch()
 	Player.audio_manager.play_crouch_sfx()
-
+	Player.ground_accel = speed*10
 
 func _update(delta : float) -> void:
 	if not Input.is_action_pressed("crouch") and not crouch_shape_cast.is_colliding():
@@ -31,8 +31,9 @@ func _update(delta : float) -> void:
 
 func physics_update(delta : float)-> void:
 	Player.update_gravity(delta , gravity_multiplier)
-	Player.update_movement(speed,acceleration , deacceleration)
+	Player.update_movement(speed ,  delta)
 
 func exit()-> void:
 	Player.uncrouch()
 	Player.audio_manager.play_uncrouch_sfx()
+	

@@ -426,16 +426,16 @@ shader_parameter/zoom = 120.0
 shader_parameter/pDir = false
 shader_parameter/noWrap = true
 
-[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable", "audio_manager")]
+[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable", "audio_manager", "camera_controller")]
 collision_mask = 3
 script = ExtResource("1_qvlqn")
 player_statemachine = NodePath("PlayerStateMachine")
 CameraJuice_Component = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice")
 itme_holdable = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D/item_holder")
 audio_manager = NodePath("AudioManager")
-air_resistance = 0.2
-wall_push_force = 7.0
-wall_jump_retention = 0.8
+camera_controller = NodePath("head/FreeLookPivot/CameraControllerComponent")
+air_resistance = 0.1
+wall_push_force = 7.5
 wall_run_velocity_threshold = 8.0
 
 [node name="head" type="Node3D" parent="." unique_id=194443698]
@@ -466,10 +466,12 @@ camer_fov_changes = true
 Player = NodePath("../../../..")
 lerp_speed = 12.0
 bob_frequency = 1.65
-bob_amplitude = 0.035
+bob_amplitude = 0.045
 left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
 right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
-player_max_sped = 17.0
+base_fov = 90.0
+max_fov = 120.0
+player_max_sped = 18.0
 
 [node name="bob_head" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/CameraJuice" unique_id=1760065247]
 unique_name_in_owner = true
@@ -541,13 +543,11 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 [node name="WalkState" type="Node" parent="PlayerStateMachine" unique_id=219710861]
 script = ExtResource("6_tblmv")
 speed = 8.5
-deacceleration = 0.25
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SprintState" type="Node" parent="PlayerStateMachine" unique_id=1776400121]
 script = ExtResource("7_263ev")
 speed = 13.0
-deacceleration = 0.25
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="CrouchState" type="Node" parent="PlayerStateMachine" unique_id=470314354 node_paths=PackedStringArray("CameraController")]
@@ -561,6 +561,7 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SlideState" type="Node" parent="PlayerStateMachine" unique_id=2100855296]
 script = ExtResource("10_nfsas")
+sliding_timer_max = 1.4
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="FallingState" type="Node" parent="PlayerStateMachine" unique_id=1690328108]
@@ -580,7 +581,7 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 [node name="WallRunState" type="Node" parent="PlayerStateMachine" unique_id=1075575694]
 script = ExtResource("20_d7dwe")
 speed = 14.0
-gravity_multiplier = 0.06
+gravity_multiplier = 0.105
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="Debug_ui" type="CanvasLayer" parent="." unique_id=1470571746 node_paths=PackedStringArray("PLayer")]
@@ -825,8 +826,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("62_0kcv4")
+max_speed = 17.0
 vg_rect = NodePath("vignete")
+max_blur_power = 0.019
 rblur_rect = NodePath("radial_blur")
+max_zoom = 190.0
 lens_distortion_rct = NodePath("lens_distortion")
 
 [node name="vignete" type="ColorRect" parent="MotionVisualEffectManager" unique_id=257867219]

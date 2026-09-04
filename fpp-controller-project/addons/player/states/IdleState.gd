@@ -2,11 +2,13 @@ class_name IdleState extends PlayerMovementState
 
 @export_category("Movement vars")
 @export var speed : float = 7.0
-@export var acceleration : float = 0.15
-@export var deacceleration : float  = 0.25
+@export var acceleration : float = 10.0
+@export var deacceleration : float  = 20.0
 @export var gravity_multiplier : float = 1.0
 
 
+func enter()->void:
+	Player.ground_accel = speed*10
 
 
 func _update(delta):
@@ -19,14 +21,14 @@ func _update(delta):
 	if Input.is_action_just_pressed("jump") and Player.is_on_floor():
 		change_state.emit("JumpState")
 	
-	if Player.velocity.y < -3.0 :
+	if !Player.is_on_floor():
 		change_state.emit("FallingState")
 	
 
 
 func physics_update(delta : float)-> void:
 	Player.update_gravity(delta , gravity_multiplier)
-	Player.update_movement(speed , acceleration , deacceleration)
+	Player.update_movement(speed ,  delta)
 	
 
 func _input_update(event ):

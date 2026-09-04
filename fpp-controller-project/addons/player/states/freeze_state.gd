@@ -15,7 +15,7 @@ func enter()->void:
 	Player.freezed = true
 
 func physics_update(delta : float)-> void:
-	Player.update_movement(speed , acceleration , deacceleration)
+	Player.update_movement(speed , delta)
 	Player.update_gravity(delta , gravity_multiplier)
 
 func exit()-> void:

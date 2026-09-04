@@ -37,10 +37,7 @@ func enter()->void:
 func _update(delta : float) -> void:
 	dash_timer -= delta
 	if dash_timer <= 0.0:
-		if Player.input_dir.length() >0.1:
-			change_state.emit("WalkState")
-		else:
-			change_state.emit("IdleState")
+		change_state.emit("IdleState")
 
 func physics_update(delta : float)-> void:
 	Player.update_gravity(delta , gravity_multiplier)

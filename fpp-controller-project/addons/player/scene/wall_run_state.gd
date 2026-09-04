@@ -13,7 +13,6 @@ class_name WallRunState
 
 
 
-
 var wall_away_sign
 
 var current_wall_run_timer : float
@@ -24,6 +23,7 @@ func enter()->void:
 	Player.velocity.y = 0.0
 	Player.CameraJuice_Component.current_camera_state = Player.CameraJuice_Component.CAMERA_STATE.WALL_RUN
 	Player.free_look = true
+
 
 func physics_update(delta : float)-> void:
 	Player.update_gravity(delta , gravity_multiplier)
@@ -58,17 +58,17 @@ func physics_update(delta : float)-> void:
 	
 	
 	if Input.is_action_just_pressed("jump"):
-		Player.wall_jump(wall_normal , 3.0  , 1.0 , Player.wall_push_force*1.6)
-		change_state.emit("FallingState")
+		Player.wall_jump(wall_normal ,0.0 , Player.wall_jump_retention , Player.wall_push_force)
+		change_state.emit("JumpState")
 	
-	
+
 
 func _update(delta : float) -> void:
 	current_wall_run_timer -= delta
 	if current_wall_run_timer <= 0.0:
 		change_state.emit("FallingState")
-
+	
+	
 func exit()-> void:
 	Player.CameraJuice_Component.rot_pivot_manager(0.0)
 	Player.CameraJuice_Component.current_camera_state = Player.CameraJuice_Component.CAMERA_STATE.GROUND_MOVEMENT
-	Player.free_look = false
