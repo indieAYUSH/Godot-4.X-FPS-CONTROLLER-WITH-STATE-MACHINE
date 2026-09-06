@@ -6,6 +6,7 @@ var last_vel
 func enter()->void:
 	Player.velocity.y = 0
 	PlayerAnimation.play("vault")
+	Player.audio_manager.play_vault_audio()
 	var ledge_p = Player.vaulter.vault_point
 	var forw = -Player.global_transform.basis.z
 	var destination  = ledge_p + (forw *1.3)

@@ -69,6 +69,7 @@
 [ext_resource type="Material" uid="uid://rvs7pir2ke6d" path="res://addons/shaders/new_shader_material.tres" id="63_q3ycd"]
 [ext_resource type="Shader" uid="uid://dkou2pmsjvbi1" path="res://addons/shaders/radial_blur.gdshader" id="64_h2m1q"]
 [ext_resource type="Shader" uid="uid://caoi2ial5x64m" path="res://addons/player/scene/lens_distortion.gdshader" id="65_s45jw"]
+[ext_resource type="AudioStream" uid="uid://clwenh0jgq57m" path="res://Assests/soundfx/player mpovement sfx/vault_02.wav" id="66_3qud2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hu6bb"]
 
@@ -569,8 +570,9 @@ air_resistance = 0.05
 wall_push_force = 8.0
 wall_run_velocity_threshold = 7.0
 wall_run_accel = 5.17
-wall_run_deaccel = 3.9050000000000002
+wall_run_deaccel = 3.905
 ground_deaacel = 3.5
+air_cap = 1.285
 vaulter = NodePath("head/vaulter")
 
 [node name="head" type="Node3D" parent="." unique_id=194443698]
@@ -731,7 +733,7 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 [node name="WallRunState" type="Node" parent="PlayerStateMachine" unique_id=1075575694]
 script = ExtResource("20_d7dwe")
 speed = 13.0
-gravity_multiplier = 0.105
+gravity_multiplier = 0.2
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="VaultState" type="Node" parent="PlayerStateMachine" unique_id=241997122]
@@ -920,10 +922,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.622, 0)
 shape = SubResource("CapsuleShape3D_qvlqn")
 disabled = true
 
-[node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
+[node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "vault_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("25_sp8cr")
-bob_frequency = 2.1
+bob_frequency = 2.25
 bob_amplitude = 0.033
 bob_smoothing = 12.0
 surface_movement_soundfx = Dictionary[String, AudioStream]({
@@ -946,12 +948,14 @@ jump_audio = SubResource("AudioStreamRandomizer_j2dof")
 crouch_audio = ExtResource("51_jthoq")
 uncrouch_audio = ExtResource("51_jthoq")
 slide_audio = ExtResource("61_mkeow")
+vault_audio = ExtResource("66_3qud2")
 movement_audio_player = NodePath("walk")
 crouch_audio_player = NodePath("crouch")
 uncrouch_audio_player = NodePath("uncrouch")
 jump_audio_player = NodePath("jump")
 land_audio_player = NodePath("land")
 slide_audio_player = NodePath("slide")
+vault_audio_player = NodePath("vault")
 player_controller = NodePath("..")
 surface_checker_cast = NodePath("surface_cast")
 
@@ -973,6 +977,8 @@ surface_checker_cast = NodePath("surface_cast")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70069623, 0.014934719)
 target_position = Vector3(0, -0.7, 0)
 collide_with_areas = true
+
+[node name="vault" type="AudioStreamPlayer3D" parent="AudioManager" unique_id=870723415]
 
 [node name="MotionVisualEffectManager" type="Control" parent="." unique_id=1850737590 node_paths=PackedStringArray("vg_rect", "rblur_rect", "lens_distortion_rct")]
 layout_mode = 3

@@ -40,6 +40,7 @@ var current_cycle_amplitude : float
 @export var uncrouch_audio : AudioStream
 @export var slide_audio : AudioStream
 @export var slide_audio_loop : AudioStream
+@export var vault_audio : AudioStream
 
 @export_category("Audio player Refrences")
 @export var movement_audio_player : AudioStreamPlayer3D
@@ -48,6 +49,7 @@ var current_cycle_amplitude : float
 @export var jump_audio_player : AudioStreamPlayer3D
 @export var land_audio_player : AudioStreamPlayer3D
 @export var slide_audio_player : AudioStreamPlayer3D
+@export var vault_audio_player : AudioStreamPlayer3D
 
 @export_category("refrences")
 @export var player_controller : PlayerController
@@ -63,6 +65,7 @@ var current_landing_audio : AudioStream
 var current_jump_sfx : AudioStream
 var current_walrun_sfx : AudioStream
 var current_sliding_sfx : AudioStream
+var current_vault_audio : AudioStream
 
 var cycle_sin : float
 
@@ -77,6 +80,7 @@ func _ready() -> void:
 	current_landing_audio = land_audio_container["default"]
 	current_movement_audio = surface_movement_soundfx["default"]
 	current_sliding_sfx = slide_audio
+	current_vault_audio = vault_audio
 	
 	crouch_audio_player.stream = crouch_audio
 	uncrouch_audio_player.stream = uncrouch_audio
@@ -84,6 +88,8 @@ func _ready() -> void:
 	land_audio_player.stream = current_landing_audio
 	jump_audio_player.stream = current_jump_sfx
 	slide_audio_player.stream = slide_audio
+	vault_audio_player.stream = current_vault_audio
+
 
 func _physics_process(delta: float) -> void:
 	var surface_collider
@@ -179,3 +185,7 @@ func dynamic_pitch_volume(delta : float) ->void:
 		
 	
 	movement_audio_player.pitch_scale = clamp(remap(current_speed , min_speed , max_speed , 0.85 , 1.2 ) , 0.85 , 1.2)
+
+
+func play_vault_audio():
+	vault_audio_player.play()
