@@ -40,10 +40,15 @@ var current_lens_zoom : float
 func _ready() -> void:
 	if player_controller == null:
 		player_controller = owner as PlayerController
+	max_speed = player_controller.max_speed
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	if !can_fsx():
+		return
+	
 	var speed : float = player_controller.velocity.length()
 	
 	var desired_rblur : float = clamp(remap(speed , min_speed , max_speed , min_blur_power , max_blur_power) , min_blur_power , max_blur_power)
@@ -61,3 +66,6 @@ func _process(delta: float) -> void:
 	vg_rect.material.set_shader_parameter("vignette_intensity" , current_vg_intensity)
 	vg_rect.material.set_shader_parameter("vignette_opacity" , current_vg_opacitu)
 	lens_distortion_rct.material.set_shader_parameter("zoom" , current_lens_zoom)
+
+func can_fsx() -> bool:
+	return player_controller.player_statemachine.current_state.name != "VaultState"

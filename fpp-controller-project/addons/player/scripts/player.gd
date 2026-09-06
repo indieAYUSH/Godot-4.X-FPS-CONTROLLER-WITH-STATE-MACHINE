@@ -1,8 +1,7 @@
 class_name PlayerController  extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+@export  var max_speed : float = 14.0
 
 
 @onready var head = %head
@@ -21,6 +20,8 @@ const JUMP_VELOCITY = 4.5
 @export var itme_holdable : item_holder
 @export var audio_manager : AudioManager
 @export var camera_controller : CameraControllerComponent
+@export var stepper_component : StepperComponent
+@export var ray_cast_component : RaycastComponent
 
 @export_category("Movement Bools")
 @export var can_dash : bool = true
@@ -33,18 +34,31 @@ const JUMP_VELOCITY = 4.5
 @export var max_wall_jump : float = 2.0
 @export var wall_jump_retention : float = 1.0
 @export var wall_run_velocity_threshold : float = 9.0
+@export var wall_run_accel : float = 14.0
+@export var wall_run_deaccel : float = 10.0
 
 @export_group("sliding")
 @export var slide_threshold_speed : float = 8.0
 
 @export_group("Ground movement")
 @export var ground_accel : float = 8.0
-@export var ground_deaacel : float = 3.5
+@export var ground_deaacel : float = 4.0
 
 @export_group("air movment var")
 @export var max_air_accel : float = 800.0
 @export var max_air_speed : float = 500.0
-@export var air_cap : float = 0.85
+@export var air_cap : float = 0.9
+
+@export_group("vaulting and mantling")
+@export var vault_time : float = 0.4
+@export var vaulter : Vaulter 
+var vault_timer : float
+
+@export_group("jumping")
+@export var coyote_time : float = 0.2
+var current_coyote_time : float
+
+
 
 var wish_dir
 
@@ -59,7 +73,8 @@ var door_key  : bool = false
 var current_movement_direction : Vector3
 var current_speed : float
 var current_horizontal_velocity : Vector3
-
+var input_dir : Vector2
+var last_frame_velocity : Vector3
 #Signals
 signal unfreezeplayer
 
@@ -68,12 +83,15 @@ func _ready():
 	lobschecker.add_exception(self)
 	r_obscheckr.add_exception(self)
 	Global.Player = self
+	current_coyote_time = coyote_time
+
 
 func _physics_process(delta):  
 	current_horizontal_velocity = Vector3(velocity.x , 0.0 , velocity.z)
 	current_movement_direction = Vector3(velocity.x , 0.0 , velocity.z).normalized()
 	current_speed = velocity.length()
 	move_and_slide()
+	stepper_component._handle_step_climbing(delta)
 
 
 
@@ -94,7 +112,7 @@ func clamp_y_rot(_min_rot_val , max_rot_val):
 
 
 func update_movement(_speed : float ,  _delta : float  ):
-	var input_dir = Input.get_vector("left", "right", "forward", "baackward").normalized()
+	input_dir = Input.get_vector("left", "right", "forward", "baackward").normalized()
 	var horizonatal_vel : Vector3 = Vector3(velocity.x , 0.0 , velocity.z)
 	wish_dir = global_transform.basis*Vector3(input_dir.x , 0.0 , input_dir.y)
 	var curr_wish_dir_speed = horizonatal_vel.dot(wish_dir)
@@ -123,18 +141,16 @@ func apply_air_resistance(delta:float):
 
 func update_air_movement(dir , delta:float , input_multiplier : float , air_control:float ) -> void:
 	apply_air_resistance(delta)
-	var input_dir = Input.get_vector("left", "right", "forward", "baackward")
+	input_dir = Input.get_vector("left", "right", "forward", "baackward")
 	
-	var wish_dir = (transform.basis*Vector3(input_dir.x , 0 , input_dir.y)).normalized()
+	var wish_dir = (global_transform.basis*Vector3(input_dir.x , 0 , input_dir.y)).normalized()
 	var horizontal_velocity : Vector3 = Vector3(velocity.x , 0 , velocity.z)
 	var speed_in_wish_dir = horizontal_velocity.dot(wish_dir)
 	var capped_speed = min((max_air_speed*wish_dir).length() , air_cap)
-	print(capped_speed)
 	var add_speed = capped_speed - speed_in_wish_dir
 	if add_speed > 0.0:
 		var desired_speed = max_air_accel * delta * max_air_speed
 		var accel_speed = min(desired_speed , add_speed)
-		print("accel speed : " , accel_speed)
 		velocity += accel_speed * wish_dir
 	
 	
@@ -159,7 +175,7 @@ func wall_jump(wall_normal : Vector3 , jump_force : float , _wall_jump_retention
 
 
 func update_slide_movement(dir , _speed : float , _acceleration : float , Deacceleration :float ):
-	var input_dir = Input.get_vector("left", "right", "forward", "baackward")
+	input_dir = Input.get_vector("left", "right", "forward", "baackward")
 	var direction = (dir * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = lerp(velocity.x , direction.x * _speed , _acceleration)
@@ -169,10 +185,23 @@ func update_slide_movement(dir , _speed : float , _acceleration : float , Deacce
 		velocity.z = move_toward(velocity.z, 0,  Deacceleration)
 
 
-func wall_run(_direction : Vector3 , _speed : float , _acceleration : float ) -> void:
+func wall_run(_direction : Vector3 , _speed : float , _acceleration : float , delta : float) -> void:
 	var wall_run_direction := velocity.slide(_direction)
-	velocity.x = lerp(velocity.x ,(wall_run_direction.normalized()).x*_speed , _acceleration )
-	velocity.z =lerp(velocity.z ,(wall_run_direction.normalized()).z*_speed , _acceleration )
+	wall_run_direction = wall_run_direction.normalized()
+	var speed_in_parrl = velocity.dot(wall_run_direction)
+	var add_speed = _speed - speed_in_parrl
+	if add_speed > 0.0:
+		var wall_accel_speed = _speed * wall_run_accel * delta
+		wall_accel_speed = min(wall_accel_speed , add_speed)
+		velocity += wall_run_direction * wall_accel_speed
+	
+	var wall_cont = max(current_horizontal_velocity.length() , wall_run_deaccel)
+	var wall_retard = delta * wall_run_deaccel * wall_cont
+	var new_speed = max(velocity.length() , 0.0)
+	if new_speed > 0.0:
+		new_speed /= velocity.length()
+	velocity.x *= new_speed
+	velocity.z *= new_speed
 
 func update_gravity(delta , _gravity_multiplier : float):
 	if not is_on_floor():
@@ -206,7 +235,16 @@ func valid_wall_run()->bool:
 			var collision_surface = get_slide_collision(i)
 			var collision_normal = collision_surface.get_normal()
 			var dir_dot = -current_movement_direction.dot(collision_normal)
-			print(dir_dot)
 			if abs(dir_dot) > 0.05 and abs(dir_dot) < 0.85:
 				return true 
 	return false
+
+
+func _vault_breeze(t : float , start_point : Vector3 , mid_point : Vector3 , end_point : Vector3)->void:
+	var a = start_point.lerp(mid_point , t)
+	var b = mid_point.lerp(end_point , t)
+	global_position = a.lerp(b , t)
+
+func _process(delta: float) -> void:
+	if !is_on_floor():
+		current_coyote_time -= delta

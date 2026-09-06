@@ -69,6 +69,7 @@ var cycle_sin : float
 func _ready() -> void:
 	if player_controller == null:
 		player_controller = owner
+	max_speed = player_controller.max_speed
 	
 	surface_checker_cast.add_exception(player_controller)
 	
@@ -117,7 +118,7 @@ func _process(delta: float) -> void:
 func calculate_walk_cycle(delta : float) ->void:
 	var valid_surface_movement : bool = (player_controller.is_on_floor() or (player_controller.is_on_wall() and player_controller.player_statemachine.current_state.name == "WallRunState"))
 	var bob_multiplier = float(player_controller.CameraJuice_Component._can_headbob())
-	var speed = player_controller.velocity.length()
+	var speed = min(player_controller.velocity.length() , max_speed)
 	if speed > 0.5 and valid_surface_movement:
 		current_cycle_frequency += bob_frequency*delta*speed
 		current_cycle_amplitude = bob_frequency*speed

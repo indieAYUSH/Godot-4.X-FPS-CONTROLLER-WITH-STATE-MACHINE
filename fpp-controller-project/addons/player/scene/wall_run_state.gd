@@ -9,7 +9,7 @@ class_name WallRunState
 @export var gravity_multiplier : float = 1.0
 
 @export_group("wall run vars")
-@export var wall_run_time : float = 2.0
+@export var wall_run_time : float = 1.8
 
 
 
@@ -42,7 +42,7 @@ func physics_update(delta : float)-> void:
 	wall_away_sign = -sign(wall_normal.dot(Player.global_transform.basis.x))
 	Player.CameraJuice_Component.rot_pivot_manager(Z_rotation_amount*wall_away_sign) 
 	
-	Player.wall_run(wall_normal , speed , acceleration)
+	Player.wall_run(wall_normal , speed , acceleration , delta)
 	
 	if !Player.is_on_wall():
 		change_state.emit("FallingState")
@@ -58,6 +58,9 @@ func physics_update(delta : float)-> void:
 	
 	
 	if Input.is_action_just_pressed("jump"):
+		if Player.vaulter.can_vault():
+			change_state.emit("VaultState")
+			return
 		Player.wall_jump(wall_normal ,0.0 , Player.wall_jump_retention , Player.wall_push_force)
 		change_state.emit("JumpState")
 	
@@ -67,6 +70,7 @@ func _update(delta : float) -> void:
 	current_wall_run_timer -= delta
 	if current_wall_run_timer <= 0.0:
 		change_state.emit("FallingState")
+		return
 	
 	
 func exit()-> void:

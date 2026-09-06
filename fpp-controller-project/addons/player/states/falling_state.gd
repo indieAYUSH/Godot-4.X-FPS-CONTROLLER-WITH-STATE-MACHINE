@@ -31,7 +31,7 @@ func physics_update(delta : float)-> void:
 		return
 	
 	
-	if Player.is_on_wall()  and Input.is_action_just_pressed("jump") and wall_jump_left > 0.0:
+	if Player.is_on_wall()  and Input.is_action_just_pressed("jump") and wall_jump_left > 0.0 and !Player.vaulter.can_vault():
 		if Player.get_last_slide_collision() == null:
 			return
 		var wall_normal = Player.get_last_slide_collision().get_normal()
@@ -61,6 +61,11 @@ func _update(delta : float) -> void:
 	var rotation_delta = max_camera_rotation * speed_delta
 	Player.CameraJuice_Component.rot_pivot_x_rot_amount = rotation_delta
 	
+	if Input.is_action_just_pressed("jump"):
+		if Player.vaulter.can_vault():
+			change_state.emit("VaultState")
+			return
+	
 	if Player.is_on_floor()  and Input.is_action_pressed("crouch") and Player.current_horizontal_velocity.length() > Player.slide_threshold_speed and Player.velocity.y <= 0.01 and Input.get_vector("left", "right", "forward", "baackward").length() > 0:
 		change_state.emit("SlideState")
 		return
@@ -71,10 +76,13 @@ func _update(delta : float) -> void:
 		PlayerAnimation.play("land")
 		Player.audio_manager.play_land_sfx()
 		return
+	
+
 
 func exit()-> void:
 	wall_jump_control_lock = 1.5
 	Player.CameraJuice_Component.rot_pivot_x_rot_amount = 0.0
+	Player.current_coyote_time = Player.coyote_time
 
 func enter()->void:
 	player_air_mov_direction = Player.transform.basis

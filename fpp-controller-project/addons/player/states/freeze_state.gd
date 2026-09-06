@@ -9,7 +9,7 @@ class_name FreezeState
 
 func _ready():
 	pass
-	#Player.unfreezeplayer.connect(unfreeze)
+
 
 func enter()->void:
 	Player.freezed = true

@@ -42,6 +42,8 @@ var current_roll : float  #used slightly to give more feel to head bob
 
 var bob_offset_vector : Vector2
 
+var player_max_speed : float
+
 @export_category("FOV Vars")
 var target_fov : float
 @export var base_fov :float = 85.0
@@ -55,6 +57,8 @@ enum CAMERA_STATE{default,GROUND_MOVEMENT , WALL_RUN}
 
 var current_camera_state : CAMERA_STATE = CAMERA_STATE.GROUND_MOVEMENT
 
+func _ready() -> void:
+	player_max_speed = Player.max_speed
 
 func _process(delta):
 	camera_effects_manager(delta)
@@ -76,7 +80,7 @@ func camera_effects_manager(delta:float) -> void:
 	
 	#Headbob Things ===============================================================
 	
-	var speed = Vector2(Player.velocity.x , Player.velocity.z).length()
+	var speed = min(Vector2(Player.velocity.x , Player.velocity.z).length() , player_max_speed)
 	head_bob_manager(speed , delta)
 	
 	#--------=============sin wave x y axis disp  headbob -====================#
@@ -90,7 +94,7 @@ func camera_effects_manager(delta:float) -> void:
 	position = offsets
 
 func fov_manager(delta:float) -> void:
-	var speed_ratio = clamp(Player.velocity.length()/player_max_sped , 0.0 , 1.0)
+	var speed_ratio = clamp(Player.velocity.length()/player_max_speed , 0.0 , 1.0)
 	target_fov = lerp(base_fov , max_fov , speed_ratio)
 	#target_fov = clamp(target_fov , base_fov , max_fov)
 	camera.fov = lerp(camera.fov, target_fov , delta*lerp_speed)

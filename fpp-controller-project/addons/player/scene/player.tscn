@@ -15,8 +15,11 @@
 [ext_resource type="Script" uid="uid://dbavcwgvqyiyg" path="res://addons/player/states/sprint_state.gd" id="7_263ev"]
 [ext_resource type="Script" uid="uid://b2ooi5fi6jx7j" path="res://addons/Other scripts/UI/debug_ui.gd" id="7_tblmv"]
 [ext_resource type="Script" uid="uid://nr0k8pums4yn" path="res://addons/player/states/crouch_state.gd" id="8_blwvw"]
+[ext_resource type="Script" uid="uid://drlxcomxs6fjg" path="res://addons/player/scripts/vaulter.gd" id="8_yqo6u"]
 [ext_resource type="Script" uid="uid://ddvfv5vhdy10b" path="res://addons/player/states/jump_state.gd" id="9_hu6bb"]
+[ext_resource type="Script" uid="uid://bgva2p34bm3vq" path="res://addons/player/scripts/stepper_component.gd" id="10_alowi"]
 [ext_resource type="Script" uid="uid://crxjj3fe1x0vl" path="res://addons/player/states/slide_state.gd" id="10_nfsas"]
+[ext_resource type="Script" uid="uid://c8lxshuht71kw" path="res://addons/player/scripts/raycast_component.gd" id="11_q3onu"]
 [ext_resource type="Script" uid="uid://c86tuupwad5vx" path="res://addons/player/UI/scripts/ui_crosshair.gd" id="13_h4jra"]
 [ext_resource type="Script" uid="uid://c333aph4jx7b3" path="res://addons/player/states/falling_state.gd" id="13_xsu4s"]
 [ext_resource type="Script" uid="uid://clyumisqx0i7s" path="res://addons/player/states/dash_state.gd" id="14_w2vqi"]
@@ -25,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://c2p4g2rmg3711" path="res://Assests/keyboard_e.svg" id="16_v58eg"]
 [ext_resource type="FontFile" uid="uid://3op67rxtj0f6" path="res://Assests/roboto/Roboto-Black.ttf" id="17_xkm3v"]
 [ext_resource type="Script" uid="uid://do0xiouc1nara" path="res://addons/player/scene/wall_run_state.gd" id="20_d7dwe"]
+[ext_resource type="Script" uid="uid://dumnjd02qq581" path="res://addons/player/states/vault_state.gd" id="23_2xtsh"]
 [ext_resource type="Script" uid="uid://bswuqjd74cpgu" path="res://addons/player/scripts/audio_manager.gd" id="25_sp8cr"]
 [ext_resource type="AudioStream" uid="uid://ixk3fsp7wn17" path="res://Assests/soundfx/movementSfx/Step_Rustle_01.wav" id="27_j2dof"]
 [ext_resource type="AudioStream" uid="uid://bcdndam2qto53" path="res://Assests/soundfx/movementSfx/Step_Rustle_02.wav" id="28_3x4x4"]
@@ -121,6 +125,66 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("head/FreeLookPivot/CameraControllerComponent:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MotionVisualEffectManager/vignete:material:shader_parameter/vignette_intensity")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MotionVisualEffectManager/vignete:material:shader_parameter/vignette_opacity")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MotionVisualEffectManager/radial_blur:material:shader_parameter/blur_power")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.01]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MotionVisualEffectManager/lens_distortion:material:shader_parameter/zoom")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [120.0]
+}
 
 [sub_resource type="Animation" id="Animation_nfsas"]
 resource_name = "crouch"
@@ -135,7 +199,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.5, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, -0.62, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -235,7 +299,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, -0.62, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -250,6 +314,70 @@ tracks/1/keys = {
 "values": [Vector3(0, -0.0815711, 0), Vector3(0, -0.35367805, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_2xtsh"]
+resource_name = "vault"
+length = 0.51
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head/FreeLookPivot/CameraControllerComponent:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2, 0.3067, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.034906585, 0, -0.008726646), Vector3(0.13962634, 0, -0.10471976), Vector3(0.12217305, 0, -0.15707964), Vector3(0.20071286, 0, -0.0418879), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MotionVisualEffectManager/vignete:material:shader_parameter/vignette_intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.29421481, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.4, 0.7, 0.7, 0.4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MotionVisualEffectManager/vignete:material:shader_parameter/vignette_opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.29421481, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 0.800000038, 0.800000038, 0.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MotionVisualEffectManager/radial_blur:material:shader_parameter/blur_power")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06742424, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.01, 0.02000000095, 0.02000000095, 0.01]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MotionVisualEffectManager/lens_distortion:material:shader_parameter/zoom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2991184, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [120.0, 300.0, 300.0, 120.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h4jra"]
 _data = {
 &"RESET": SubResource("Animation_iqofo"),
@@ -257,7 +385,8 @@ _data = {
 &"jump": SubResource("Animation_w2vqi"),
 &"land": SubResource("Animation_ojh3p"),
 &"standing": SubResource("Animation_hu6bb"),
-&"uncrouch": SubResource("Animation_h4jra")
+&"uncrouch": SubResource("Animation_h4jra"),
+&"vault": SubResource("Animation_2xtsh")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_xsu4s"]
@@ -426,7 +555,7 @@ shader_parameter/zoom = 120.0
 shader_parameter/pDir = false
 shader_parameter/noWrap = true
 
-[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable", "audio_manager", "camera_controller")]
+[node name="Player" type="CharacterBody3D" unique_id=924331116 node_paths=PackedStringArray("player_statemachine", "CameraJuice_Component", "itme_holdable", "audio_manager", "camera_controller", "stepper_component", "ray_cast_component", "vaulter")]
 collision_mask = 3
 script = ExtResource("1_qvlqn")
 player_statemachine = NodePath("PlayerStateMachine")
@@ -434,13 +563,19 @@ CameraJuice_Component = NodePath("head/FreeLookPivot/CameraControllerComponent/C
 itme_holdable = NodePath("head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D/item_holder")
 audio_manager = NodePath("AudioManager")
 camera_controller = NodePath("head/FreeLookPivot/CameraControllerComponent")
-air_resistance = 0.1
-wall_push_force = 7.5
-wall_run_velocity_threshold = 8.0
+stepper_component = NodePath("Components/StepperComponent")
+ray_cast_component = NodePath("Components/RaycastComponent")
+air_resistance = 0.05
+wall_push_force = 8.0
+wall_run_velocity_threshold = 7.0
+wall_run_accel = 5.17
+wall_run_deaccel = 3.9050000000000002
+ground_deaacel = 3.5
+vaulter = NodePath("head/vaulter")
 
 [node name="head" type="Node3D" parent="." unique_id=194443698]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.905, 0)
 
 [node name="pos_place_holder" type="Node3D" parent="head" unique_id=2106155273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.6431665)
@@ -465,7 +600,7 @@ Head_bob = true
 camer_fov_changes = true
 Player = NodePath("../../../..")
 lerp_speed = 12.0
-bob_frequency = 1.65
+bob_frequency = 2.1
 bob_amplitude = 0.045
 left_collision_checker = NodePath("../obstacle_checker/LnRcollision/Lobschecker")
 right_collision_checker = NodePath("../obstacle_checker/LnRcollision/RObscheckr")
@@ -500,7 +635,7 @@ item_resource = Array[ExtResource("5_t4wwt")]([ExtResource("5_ygc1f")])
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0815711, 0)
 shape = SubResource("SphereShape3D_hu6bb")
-target_position = Vector3(0, 0, 0)
+target_position = Vector3(0, 0.205, 0)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="LnRcollision" type="Node3D" parent="head/FreeLookPivot/CameraControllerComponent/obstacle_checker" unique_id=139052779]
@@ -520,6 +655,15 @@ shape = SubResource("SphereShape3D_1wljh")
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(0.8679503, 0.53599346, 1.92523e-07, 1)
 
+[node name="vaulter" type="Node3D" parent="head" unique_id=965003606 node_paths=PackedStringArray("vault_cast", "ray_cast_component")]
+script = ExtResource("8_yqo6u")
+vault_cast = NodePath("vault_cast")
+ray_cast_component = NodePath("../../Components/RaycastComponent")
+
+[node name="vault_cast" type="RayCast3D" parent="head/vaulter" unique_id=1156447581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.63)
+target_position = Vector3(0, -1.7, 0)
+
 [node name="Components" type="Node" parent="." unique_id=1451967956]
 
 [node name="MouseControllerComponent" type="Node" parent="Components" unique_id=1245595419 node_paths=PackedStringArray("camera_controller")]
@@ -530,6 +674,12 @@ camera_controller = NodePath("../../head/FreeLookPivot/CameraControllerComponent
 [node name="PlayerInterractionRay" type="Node" parent="Components" unique_id=1938175511 node_paths=PackedStringArray("interaction_raycast")]
 script = ExtResource("5_vd5ca")
 interaction_raycast = NodePath("../../head/FreeLookPivot/CameraControllerComponent/CameraJuice/bob_head/rot_pivot/Camera3D/Interraction_Ray_cast")
+
+[node name="StepperComponent" type="Node" parent="Components" unique_id=696108460]
+script = ExtResource("10_alowi")
+
+[node name="RaycastComponent" type="Node" parent="Components" unique_id=303268231]
+script = ExtResource("11_q3onu")
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=338015821 node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_gp3q6")
@@ -542,12 +692,11 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="WalkState" type="Node" parent="PlayerStateMachine" unique_id=219710861]
 script = ExtResource("6_tblmv")
-speed = 8.5
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SprintState" type="Node" parent="PlayerStateMachine" unique_id=1776400121]
 script = ExtResource("7_263ev")
-speed = 13.0
+speed = 10.0
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="CrouchState" type="Node" parent="PlayerStateMachine" unique_id=470314354 node_paths=PackedStringArray("CameraController")]
@@ -561,6 +710,7 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="SlideState" type="Node" parent="PlayerStateMachine" unique_id=2100855296]
 script = ExtResource("10_nfsas")
+sliding_speed = 13.5
 sliding_timer_max = 1.4
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
@@ -580,8 +730,12 @@ metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="WallRunState" type="Node" parent="PlayerStateMachine" unique_id=1075575694]
 script = ExtResource("20_d7dwe")
-speed = 14.0
+speed = 13.0
 gravity_multiplier = 0.105
+metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
+
+[node name="VaultState" type="Node" parent="PlayerStateMachine" unique_id=241997122]
+script = ExtResource("23_2xtsh")
 metadata/_custom_type_script = "uid://bdb24wwkuvnvt"
 
 [node name="Debug_ui" type="CanvasLayer" parent="." unique_id=1470571746 node_paths=PackedStringArray("PLayer")]
@@ -753,20 +907,23 @@ text = "this is a warning"
 label_settings = SubResource("LabelSettings_kvncf")
 
 [node name="TimersHolderComponent" type="Node3D" parent="." unique_id=161856373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="DashCoolDown" type="Timer" parent="TimersHolderComponent" unique_id=1484012505]
 
 [node name="uncrouched_collision_shape" type="CollisionShape3D" parent="." unique_id=1718317768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_mbkfo")
 
 [node name="crouched_collsion_shape" type="CollisionShape3D" parent="." unique_id=600408152]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37819394, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.622, 0)
 shape = SubResource("CapsuleShape3D_qvlqn")
 disabled = true
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=1679738778 node_paths=PackedStringArray("movement_audio_player", "crouch_audio_player", "uncrouch_audio_player", "jump_audio_player", "land_audio_player", "slide_audio_player", "player_controller", "surface_checker_cast") groups=["sdio_player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("25_sp8cr")
-bob_frequency = 1.84
+bob_frequency = 2.1
 bob_amplitude = 0.033
 bob_smoothing = 12.0
 surface_movement_soundfx = Dictionary[String, AudioStream]({
@@ -826,9 +983,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("62_0kcv4")
-max_speed = 17.0
+max_speed = 14.0
 vg_rect = NodePath("vignete")
-max_blur_power = 0.019
+max_blur_power = 0.024
 rblur_rect = NodePath("radial_blur")
 max_zoom = 190.0
 lens_distortion_rct = NodePath("lens_distortion")

@@ -29,6 +29,11 @@ func enter()->void:
 
 func _update(delta : float) -> void:
 	
+	if Input.is_action_just_pressed("jump"):
+		if Player.vaulter.can_vault():
+			change_state.emit("VaultState")
+			return
+	
 	if Player.velocity.y < -5.0 :
 		change_state.emit("FallingState")
 	
@@ -51,7 +56,7 @@ func physics_update(delta : float)-> void:
 	if  Input.is_action_just_pressed("Dash") and Player.can_dash :
 		change_state.emit("DashState")
 	
-	if Player.is_on_wall()  and Input.is_action_just_pressed("jump") and wall_jump_left > 0.0:
+	if Player.is_on_wall()  and Input.is_action_just_pressed("jump") and wall_jump_left > 0.0 and !Player.vaulter.can_vault():
 		if Player.get_last_slide_collision() == null:
 			return
 		var wall_normal = Player.get_last_slide_collision().get_normal()
@@ -91,3 +96,4 @@ func exit()-> void:
 	PlayerAnimation.play("land")
 	double_jump = true
 	wall_jump_left = Player.max_wall_jump
+	Player.current_coyote_time = Player.coyote_time

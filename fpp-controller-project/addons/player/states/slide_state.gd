@@ -32,7 +32,11 @@ func physics_update(delta : float)-> void:
 func _update(delta : float) -> void:
 	sliding_timer-= delta
 	if Input.is_action_just_pressed("jump"):
-		change_state.emit("JumpState")
+		if Player.vaulter.can_vault():
+			change_state.emit("VaultState")
+			return
+		elif Player.current_coyote_time > 0.0:
+			change_state.emit("JumpState")
 		return
 	if sliding_timer <= 0.0:
 		change_state.emit("IdleState")

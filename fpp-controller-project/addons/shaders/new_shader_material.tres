@@ -4,6 +4,6 @@
 
 [resource]
 shader = ExtResource("1_mdo8w")
-shader_parameter/vignette_intensity = 0.7
-shader_parameter/vignette_opacity = 0.800000038
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 shader_parameter/vignette_rgb = Color(0, 0, 0, 1)

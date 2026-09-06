@@ -330,6 +330,48 @@ use_collision = true
 size = Vector3(4, 4, 4)
 material = SubResource("StandardMaterial3D_ik3e0")
 
+[node name="CSGBox3D4" type="CSGBox3D" parent="Props" unique_id=1902603876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6947117, 0.6932554, 0)
+use_collision = true
+size = Vector3(1.0947266, 0.446, 4)
+material = SubResource("StandardMaterial3D_ik3e0")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Props" unique_id=474429736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.781647, 0.8487898, 0)
+use_collision = true
+size = Vector3(1.0947266, 0.7570689, 4)
+material = SubResource("StandardMaterial3D_ik3e0")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Props" unique_id=1520916546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.829287, 1.037147, 0)
+use_collision = true
+size = Vector3(1.0947266, 1.1337835, 4)
+material = SubResource("StandardMaterial3D_ik3e0")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Props" unique_id=428874595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.147348, 0.98708993, 7.1803036)
+use_collision = true
+size = Vector3(4, 1.033669, 4)
+material = SubResource("StandardMaterial3D_ik3e0")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Props" unique_id=949290184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.147348, 1.3005111, 12.426586)
+use_collision = true
+size = Vector3(4, 1.661, 2.315)
+material = SubResource("StandardMaterial3D_ik3e0")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Props" unique_id=1276586114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.147348, 1.8076245, 9.35524)
+use_collision = true
+size = Vector3(4, 2.6752267, 2.315)
+material = SubResource("StandardMaterial3D_ik3e0")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Props" unique_id=531871539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.147348, 1.3163648, 16.060066)
+use_collision = true
+size = Vector3(0.4, 1.6924804, 2.169)
+material = SubResource("StandardMaterial3D_ik3e0")
+
 [node name="CSGBox3D2" type="CSGBox3D" parent="Props" unique_id=2074587660]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4500532, 7.663974)
 use_collision = true
